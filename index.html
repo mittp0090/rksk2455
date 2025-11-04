@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="웅이작가 - 전문 사진작가 포트폴리오">
     <title>웅이작가 | 사진작가 포트폴리오</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -32,18 +38,26 @@
 
     <!-- 히어로 섹션 -->
     <section id="home" class="hero">
+        <div class="hero-overlay"></div>
         <div class="hero-content">
+            <span class="hero-label">Visual Storyteller</span>
             <h2 class="hero-title">순간을 예술로</h2>
-            <p class="hero-subtitle">사진으로 담아내는 특별한 이야기</p>
-            <a href="#portfolio" class="btn btn-primary">작품 보기</a>
+            <p class="hero-subtitle">빛과 그림자, 그 사이의 이야기를 담다</p>
+            <a href="#portfolio" class="btn btn-primary">View Portfolio</a>
+        </div>
+        <div class="scroll-indicator">
+            <span></span>
         </div>
     </section>
 
     <!-- 포트폴리오 섹션 -->
     <section id="portfolio" class="portfolio">
         <div class="container">
-            <h2 class="section-title">Portfolio</h2>
-            <p class="section-subtitle">최근 작업물을 만나보세요</p>
+            <div class="section-header">
+                <span class="section-label">Works</span>
+                <h2 class="section-title">Selected Projects</h2>
+                <p class="section-subtitle">각각의 프레임에 담긴 특별한 순간들</p>
+            </div>
 
             <div class="portfolio-filters">
                 <button class="filter-btn active" data-filter="all">All</button>
@@ -123,11 +137,15 @@
         <div class="container">
             <div class="about-content">
                 <div class="about-image">
-                    <img src="images/profile.jpg" alt="웅이작가" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23ddd%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2224%22 fill=%22%23999%22%3E프로필 사진%3C/text%3E%3C/svg%3E'">
+                    <div class="image-wrapper">
+                        <img src="images/profile.jpg" alt="웅이작가" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23222%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2224%22 fill=%22%23888%22%3E웅이작가%3C/text%3E%3C/svg%3E'">
+                        <div class="image-border"></div>
+                    </div>
                 </div>
                 <div class="about-text">
-                    <h2 class="section-title">About Me</h2>
-                    <p class="section-subtitle">사진작가 웅이작가를 소개합니다</p>
+                    <span class="section-label">About</span>
+                    <h2 class="section-title">예술로서의 사진</h2>
+                    <p class="section-subtitle">Visual Artist & Photographer</p>
                     <p>
                         안녕하세요, 사진작가 웅이작가입니다.<br><br>
 
@@ -159,8 +177,11 @@
     <!-- 연락처 섹션 -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2 class="section-title">Contact</h2>
-            <p class="section-subtitle">프로젝트 문의를 기다립니다</p>
+            <div class="section-header">
+                <span class="section-label">Get In Touch</span>
+                <h2 class="section-title">함께 만들어갈<br>특별한 순간</h2>
+                <p class="section-subtitle">새로운 프로젝트를 시작할 준비가 되어있습니다</p>
+            </div>
 
             <div class="contact-content">
                 <div class="contact-info">
