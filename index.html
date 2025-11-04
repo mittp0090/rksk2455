@@ -4,238 +4,292 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="웅이작가 - 전문 사진작가 포트폴리오">
-    <title>웅이작가 | 사진작가 포트폴리오</title>
+    <title>웅이작가 | Premium Photography</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- 헤더 & 네비게이션 -->
-    <header class="header">
-        <nav class="navbar">
-            <div class="container">
-                <div class="logo">
-                    <h1>웅이작가</h1>
-                </div>
-                <ul class="nav-menu">
-                    <li><a href="#home" class="nav-link">Home</a></li>
-                    <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
-                    <li><a href="#about" class="nav-link">About</a></li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
-                </ul>
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-        </nav>
+    <!-- 로딩 스크린 -->
+    <div class="loader">
+        <div class="loader-content">
+            <h1 class="loader-title">웅이작가</h1>
+            <div class="loader-bar"></div>
+        </div>
+    </div>
+
+    <!-- 사이드 네비게이션 -->
+    <nav class="sidebar">
+        <div class="sidebar-logo">
+            <h1>웅이<br>작가</h1>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#home" class="sidebar-link active">01. Home</a></li>
+            <li><a href="#portfolio" class="sidebar-link">02. Portfolio</a></li>
+            <li><a href="#about" class="sidebar-link">03. About</a></li>
+            <li><a href="#contact" class="sidebar-link">04. Contact</a></li>
+        </ul>
+        <div class="sidebar-social">
+            <a href="#" class="social-icon">IN</a>
+            <a href="#" class="social-icon">FB</a>
+            <a href="#" class="social-icon">IG</a>
+        </div>
+    </nav>
+
+    <!-- 모바일 헤더 -->
+    <header class="mobile-header">
+        <div class="mobile-logo">웅이작가</div>
+        <button class="mobile-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </header>
 
-    <!-- 히어로 섹션 -->
-    <section id="home" class="hero">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <span class="hero-label">Visual Storyteller</span>
-            <h2 class="hero-title">순간을 예술로</h2>
-            <p class="hero-subtitle">빛과 그림자, 그 사이의 이야기를 담다</p>
-            <a href="#portfolio" class="btn btn-primary">View Portfolio</a>
-        </div>
-        <div class="scroll-indicator">
-            <span></span>
-        </div>
-    </section>
+    <!-- 메인 컨텐츠 -->
+    <main class="main-content">
 
-    <!-- 포트폴리오 섹션 -->
-    <section id="portfolio" class="portfolio">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">Works</span>
-                <h2 class="section-title">Selected Projects</h2>
-                <p class="section-subtitle">각각의 프레임에 담긴 특별한 순간들</p>
+        <!-- 히어로 섹션 -->
+        <section id="home" class="hero-section">
+            <div class="hero-bg">
+                <div class="hero-bg-overlay"></div>
             </div>
-
-            <div class="portfolio-filters">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="portrait">인물</button>
-                <button class="filter-btn" data-filter="landscape">풍경</button>
-                <button class="filter-btn" data-filter="wedding">웨딩</button>
-                <button class="filter-btn" data-filter="commercial">상업</button>
-            </div>
-
-            <div class="portfolio-grid">
-                <!-- 포트폴리오 아이템들 (예시) -->
-                <div class="portfolio-item" data-category="portrait">
-                    <div class="portfolio-image">
-                        <img src="images/placeholder.jpg" alt="포트폴리오 1" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22%3E%3Crect width=%22400%22 height=%22300%22 fill=%22%23ddd%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2224%22 fill=%22%23999%22%3E인물 사진%3C/text%3E%3C/svg%3E'">
-                        <div class="portfolio-overlay">
-                            <h3>인물 사진</h3>
-                            <p>Portrait Photography</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="portfolio-item" data-category="landscape">
-                    <div class="portfolio-image">
-                        <img src="images/placeholder.jpg" alt="포트폴리오 2" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22%3E%3Crect width=%22400%22 height=%22300%22 fill=%22%23ddd%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2224%22 fill=%22%23999%22%3E풍경 사진%3C/text%3E%3C/svg%3E'">
-                        <div class="portfolio-overlay">
-                            <h3>풍경 사진</h3>
-                            <p>Landscape Photography</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="portfolio-item" data-category="wedding">
-                    <div class="portfolio-image">
-                        <img src="images/placeholder.jpg" alt="포트폴리오 3" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22%3E%3Crect width=%22400%22 height=%22300%22 fill=%22%23ddd%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2224%22 fill=%22%23999%22%3E웨딩 사진%3C/text%3E%3C/svg%3E'">
-                        <div class="portfolio-overlay">
-                            <h3>웨딩 사진</h3>
-                            <p>Wedding Photography</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="portfolio-item" data-category="commercial">
-                    <div class="portfolio-image">
-                        <img src="images/placeholder.jpg" alt="포트폴리오 4" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22%3E%3Crect width=%22400%22 height=%22300%22 fill=%22%23ddd%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2224%22 fill=%22%23999%22%3E상업 사진%3C/text%3E%3C/svg%3E'">
-                        <div class="portfolio-overlay">
-                            <h3>상업 사진</h3>
-                            <p>Commercial Photography</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="portfolio-item" data-category="portrait">
-                    <div class="portfolio-image">
-                        <img src="images/placeholder.jpg" alt="포트폴리오 5" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22%3E%3Crect width=%22400%22 height=%22300%22 fill=%22%23ddd%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2224%22 fill=%22%23999%22%3E인물 사진%3C/text%3E%3C/svg%3E'">
-                        <div class="portfolio-overlay">
-                            <h3>인물 사진</h3>
-                            <p>Portrait Photography</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="portfolio-item" data-category="landscape">
-                    <div class="portfolio-image">
-                        <img src="images/placeholder.jpg" alt="포트폴리오 6" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22%3E%3Crect width=%22400%22 height=%22300%22 fill=%22%23ddd%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2224%22 fill=%22%23999%22%3E풍경 사진%3C/text%3E%3C/svg%3E'">
-                        <div class="portfolio-overlay">
-                            <h3>풍경 사진</h3>
-                            <p>Landscape Photography</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 소개 섹션 -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-image">
-                    <div class="image-wrapper">
-                        <img src="images/profile.jpg" alt="웅이작가" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23222%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2224%22 fill=%22%23888%22%3E웅이작가%3C/text%3E%3C/svg%3E'">
-                        <div class="image-border"></div>
-                    </div>
-                </div>
-                <div class="about-text">
-                    <span class="section-label">About</span>
-                    <h2 class="section-title">예술로서의 사진</h2>
-                    <p class="section-subtitle">Visual Artist & Photographer</p>
-                    <p>
-                        안녕하세요, 사진작가 웅이작가입니다.<br><br>
-
-                        저는 순간의 감동을 포착하고 그것을 영원히 간직할 수 있는 이미지로 만드는 것을 사명으로 삼고 있습니다.
-                        사진은 단순히 기록을 넘어서 감정과 이야기를 전달하는 예술이라고 생각합니다.<br><br>
-
-                        인물, 풍경, 웨딩, 상업 사진 등 다양한 분야에서 활동하고 있으며,
-                        각 프로젝트마다 고객의 니즈와 스토리를 담아내기 위해 노력합니다.
+            <div class="hero-container">
+                <div class="hero-text">
+                    <span class="hero-tag">Visual Artist</span>
+                    <h1 class="hero-heading">
+                        <span class="hero-line">순간을</span>
+                        <span class="hero-line">영원으로</span>
+                    </h1>
+                    <p class="hero-description">
+                        빛과 그림자 사이, 찰나와 영원 사이<br>
+                        예술로 기억되는 순간들
                     </p>
-                    <div class="about-stats">
-                        <div class="stat-item">
-                            <h3>10+</h3>
-                            <p>경력 년수</p>
-                        </div>
-                        <div class="stat-item">
-                            <h3>500+</h3>
-                            <p>완료 프로젝트</p>
-                        </div>
-                        <div class="stat-item">
-                            <h3>100%</h3>
-                            <p>고객 만족도</p>
-                        </div>
+                    <div class="hero-cta">
+                        <a href="#portfolio" class="btn-main">작품 감상하기</a>
+                        <a href="#contact" class="btn-outline">문의하기</a>
+                    </div>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Projects</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">10+</span>
+                        <span class="stat-label">Years</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Satisfaction</span>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+            <div class="scroll-down">
+                <span>Scroll</span>
+                <div class="scroll-line"></div>
+            </div>
+        </section>
 
-    <!-- 연락처 섹션 -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">Get In Touch</span>
-                <h2 class="section-title">함께 만들어갈<br>특별한 순간</h2>
-                <p class="section-subtitle">새로운 프로젝트를 시작할 준비가 되어있습니다</p>
+        <!-- 포트폴리오 섹션 -->
+        <section id="portfolio" class="portfolio-section">
+            <div class="section-intro">
+                <span class="section-number">02</span>
+                <h2 class="section-heading">Selected<br>Works</h2>
+                <p class="section-desc">각각의 프레임에 담긴<br>특별한 순간들</p>
             </div>
 
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="info-item">
-                        <div class="icon">📧</div>
-                        <h3>Email</h3>
-                        <p>photographer@example.com</p>
-                    </div>
-                    <div class="info-item">
-                        <div class="icon">📱</div>
-                        <h3>Phone</h3>
-                        <p>010-XXXX-XXXX</p>
-                    </div>
-                    <div class="info-item">
-                        <div class="icon">📍</div>
-                        <h3>Location</h3>
-                        <p>Seoul, Korea</p>
-                    </div>
-                    <div class="info-item">
-                        <div class="icon">💼</div>
-                        <h3>Social</h3>
-                        <div class="social-links">
-                            <a href="#" class="social-link">Instagram</a>
-                            <a href="#" class="social-link">Facebook</a>
-                            <a href="#" class="social-link">Blog</a>
+            <div class="portfolio-filters-modern">
+                <button class="filter-modern active" data-filter="all">All Works</button>
+                <button class="filter-modern" data-filter="portrait">Portrait</button>
+                <button class="filter-modern" data-filter="landscape">Landscape</button>
+                <button class="filter-modern" data-filter="wedding">Wedding</button>
+                <button class="filter-modern" data-filter="commercial">Commercial</button>
+            </div>
+
+            <div class="portfolio-masonry">
+                <!-- 큰 아이템 -->
+                <div class="masonry-item large" data-category="portrait">
+                    <div class="masonry-image">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&h=1000&fit=crop" alt="Portrait" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%221000%22%3E%3Cdefs%3E%3ClinearGradient id=%22g%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22%3E%3Cstop offset=%220%25%22 style=%22stop-color:%23000;stop-opacity:1%22/%3E%3Cstop offset=%22100%25%22 style=%22stop-color:%23333;stop-opacity:1%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22800%22 height=%221000%22 fill=%22url(%23g)%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22serif%22 font-size=%2248%22 fill=%22%23d4af37%22%3EPortrait%3C/text%3E%3C/svg%3E'">
+                        <div class="masonry-overlay">
+                            <span class="masonry-category">Portrait</span>
+                            <h3 class="masonry-title">인물의 정수</h3>
                         </div>
                     </div>
                 </div>
 
-                <form class="contact-form">
-                    <div class="form-group">
-                        <input type="text" name="name" placeholder="이름" required>
+                <!-- 일반 아이템들 -->
+                <div class="masonry-item" data-category="landscape">
+                    <div class="masonry-image">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=400&fit=crop" alt="Landscape" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22400%22%3E%3Cdefs%3E%3ClinearGradient id=%22g2%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22%3E%3Cstop offset=%220%25%22 style=%22stop-color:%23001a33;stop-opacity:1%22/%3E%3Cstop offset=%22100%25%22 style=%22stop-color:%23003366;stop-opacity:1%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22600%22 height=%22400%22 fill=%22url(%23g2)%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22serif%22 font-size=%2236%22 fill=%22%23d4af37%22%3ELandscape%3C/text%3E%3C/svg%3E'">
+                        <div class="masonry-overlay">
+                            <span class="masonry-category">Landscape</span>
+                            <h3 class="masonry-title">자연의 서사</h3>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <input type="email" name="email" placeholder="이메일" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="subject" placeholder="제목" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea name="message" rows="5" placeholder="메시지" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">메시지 보내기</button>
-                </form>
-            </div>
-        </div>
-    </section>
+                </div>
 
-    <!-- 푸터 -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 웅이작가. All rights reserved.</p>
-        </div>
-    </footer>
+                <div class="masonry-item" data-category="wedding">
+                    <div class="masonry-image">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=400&fit=crop" alt="Wedding" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22400%22%3E%3Cdefs%3E%3ClinearGradient id=%22g3%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22%3E%3Cstop offset=%220%25%22 style=%22stop-color:%23330000;stop-opacity:1%22/%3E%3Cstop offset=%22100%25%22 style=%22stop-color:%23660033;stop-opacity:1%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22600%22 height=%22400%22 fill=%22url(%23g3)%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22serif%22 font-size=%2236%22 fill=%22%23d4af37%22%3EWedding%3C/text%3E%3C/svg%3E'">
+                        <div class="masonry-overlay">
+                            <span class="masonry-category">Wedding</span>
+                            <h3 class="masonry-title">영원한 약속</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry-item tall" data-category="portrait">
+                    <div class="masonry-image">
+                        <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&h=800&fit=crop" alt="Portrait" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22800%22%3E%3Cdefs%3E%3ClinearGradient id=%22g4%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22%3E%3Cstop offset=%220%25%22 style=%22stop-color:%23000;stop-opacity:1%22/%3E%3Cstop offset=%22100%25%22 style=%22stop-color:%23444;stop-opacity:1%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22600%22 height=%22800%22 fill=%22url(%23g4)%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22serif%22 font-size=%2240%22 fill=%22%23d4af37%22%3EPortrait%3C/text%3E%3C/svg%3E'">
+                        <div class="masonry-overlay">
+                            <span class="masonry-category">Portrait</span>
+                            <h3 class="masonry-title">감성 초상</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry-item" data-category="commercial">
+                    <div class="masonry-image">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&h=400&fit=crop" alt="Commercial" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22400%22%3E%3Cdefs%3E%3ClinearGradient id=%22g5%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22%3E%3Cstop offset=%220%25%22 style=%22stop-color:%23003300;stop-opacity:1%22/%3E%3Cstop offset=%22100%25%22 style=%22stop-color:%23006600;stop-opacity:1%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22600%22 height=%22400%22 fill=%22url(%23g5)%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22serif%22 font-size=%2236%22 fill=%22%23d4af37%22%3ECommercial%3C/text%3E%3C/svg%3E'">
+                        <div class="masonry-overlay">
+                            <span class="masonry-category">Commercial</span>
+                            <h3 class="masonry-title">브랜드 스토리</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry-item wide" data-category="landscape">
+                    <div class="masonry-image">
+                        <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&h=400&fit=crop" alt="Landscape" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22400%22%3E%3Cdefs%3E%3ClinearGradient id=%22g6%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22%3E%3Cstop offset=%220%25%22 style=%22stop-color:%23000033;stop-opacity:1%22/%3E%3Cstop offset=%22100%25%22 style=%22stop-color:%23000066;stop-opacity:1%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22800%22 height=%22400%22 fill=%22url(%23g6)%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22serif%22 font-size=%2248%22 fill=%22%23d4af37%22%3ELandscape%3C/text%3E%3C/svg%3E'">
+                        <div class="masonry-overlay">
+                            <span class="masonry-category">Landscape</span>
+                            <h3 class="masonry-title">파노라마</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About 섹션 -->
+        <section id="about" class="about-section">
+            <div class="about-container">
+                <div class="about-content">
+                    <span class="section-number">03</span>
+                    <h2 class="section-heading">About<br>Artist</h2>
+                    <div class="about-text">
+                        <p class="about-lead">
+                            순간을 포착하고, 감정을 담아내며,<br>
+                            이야기를 만들어갑니다.
+                        </p>
+                        <p>
+                            저는 10년 이상 사진을 통해 세상과 소통해왔습니다.
+                            단순히 아름다운 이미지를 넘어서, 그 안에 담긴 감정과
+                            이야기를 전달하는 것이 제 작업의 핵심입니다.
+                        </p>
+                        <p>
+                            인물, 풍경, 웨딩, 상업 사진 등 다양한 분야에서
+                            활동하며 수많은 고객들과 함께 특별한 순간들을
+                            만들어왔습니다.
+                        </p>
+                        <div class="about-awards">
+                            <div class="award">
+                                <span class="award-year">2023</span>
+                                <span class="award-title">Photography Excellence Award</span>
+                            </div>
+                            <div class="award">
+                                <span class="award-year">2022</span>
+                                <span class="award-title">Best Portrait Photographer</span>
+                            </div>
+                            <div class="award">
+                                <span class="award-year">2021</span>
+                                <span class="award-title">Visual Arts Recognition</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop" alt="웅이작가" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22800%22%3E%3Cdefs%3E%3ClinearGradient id=%22g7%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22%3E%3Cstop offset=%220%25%22 style=%22stop-color:%23000;stop-opacity:1%22/%3E%3Cstop offset=%22100%25%22 style=%22stop-color:%23222;stop-opacity:1%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22600%22 height=%22800%22 fill=%22url(%23g7)%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22serif%22 font-size=%2248%22 fill=%22%23d4af37%22%3E웅이작가%3C/text%3E%3C/svg%3E'">
+                    <div class="about-image-border"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact 섹션 -->
+        <section id="contact" class="contact-section">
+            <div class="contact-container">
+                <div class="contact-intro">
+                    <span class="section-number">04</span>
+                    <h2 class="section-heading">Let's Create<br>Something<br>Amazing</h2>
+                    <p class="contact-tagline">
+                        새로운 프로젝트를 시작할<br>
+                        준비가 되어있습니다
+                    </p>
+                </div>
+
+                <div class="contact-form-wrapper">
+                    <form class="contact-form-modern">
+                        <div class="form-row">
+                            <div class="form-field">
+                                <input type="text" name="name" required>
+                                <label>성함</label>
+                            </div>
+                            <div class="form-field">
+                                <input type="email" name="email" required>
+                                <label>이메일</label>
+                            </div>
+                        </div>
+                        <div class="form-field">
+                            <input type="text" name="subject" required>
+                            <label>제목</label>
+                        </div>
+                        <div class="form-field">
+                            <textarea name="message" rows="6" required></textarea>
+                            <label>메시지</label>
+                        </div>
+                        <button type="submit" class="btn-submit">메시지 보내기</button>
+                    </form>
+
+                    <div class="contact-info-modern">
+                        <div class="info-block">
+                            <span class="info-label">Email</span>
+                            <a href="mailto:hello@photographer.com" class="info-value">hello@photographer.com</a>
+                        </div>
+                        <div class="info-block">
+                            <span class="info-label">Phone</span>
+                            <a href="tel:+821012345678" class="info-value">+82 10-1234-5678</a>
+                        </div>
+                        <div class="info-block">
+                            <span class="info-label">Location</span>
+                            <span class="info-value">Seoul, South Korea</span>
+                        </div>
+                        <div class="info-block">
+                            <span class="info-label">Follow</span>
+                            <div class="social-links-modern">
+                                <a href="#">Instagram</a>
+                                <a href="#">Facebook</a>
+                                <a href="#">LinkedIn</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer-modern">
+            <div class="footer-content">
+                <p>&copy; 2024 웅이작가. All Rights Reserved.</p>
+                <p class="footer-subtitle">Crafted with passion for visual storytelling</p>
+            </div>
+        </footer>
+
+    </main>
 
     <script src="js/script.js"></script>
 </body>
