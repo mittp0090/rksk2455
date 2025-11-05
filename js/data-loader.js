@@ -1,10 +1,62 @@
 // 관리자 페이지에서 저장한 데이터 로드
 
 document.addEventListener('DOMContentLoaded', function() {
+    loadHeroData();
     loadPortfolioData();
     loadTextData();
     loadContactData();
 });
+
+function loadHeroData() {
+    const saved = localStorage.getItem('heroData');
+    if (!saved) return;
+
+    const data = JSON.parse(saved);
+
+    // Hero 태그
+    const heroTag = document.querySelector('.hero-tag');
+    if (heroTag && data.heroTag) {
+        heroTag.textContent = data.heroTag;
+    }
+
+    // Hero 타이틀 라인
+    const heroLines = document.querySelectorAll('.hero-line');
+    if (heroLines[0] && data.heroLine1) {
+        heroLines[0].textContent = data.heroLine1;
+    }
+    if (heroLines[1] && data.heroLine2) {
+        heroLines[1].textContent = data.heroLine2;
+    }
+
+    // Hero 설명
+    const heroDescription = document.querySelector('.hero-description');
+    if (heroDescription && data.heroDescription) {
+        heroDescription.innerHTML = data.heroDescription.replace(/\n/g, '<br>');
+    }
+
+    // 통계 정보
+    const stats = document.querySelectorAll('.stat');
+    if (stats[0]) {
+        const num1 = stats[0].querySelector('.stat-number');
+        const label1 = stats[0].querySelector('.stat-label');
+        if (num1 && data.stat1Number) num1.textContent = data.stat1Number;
+        if (label1 && data.stat1Label) label1.textContent = data.stat1Label;
+    }
+    if (stats[1]) {
+        const num2 = stats[1].querySelector('.stat-number');
+        const label2 = stats[1].querySelector('.stat-label');
+        if (num2 && data.stat2Number) num2.textContent = data.stat2Number;
+        if (label2 && data.stat2Label) label2.textContent = data.stat2Label;
+    }
+    if (stats[2]) {
+        const num3 = stats[2].querySelector('.stat-number');
+        const label3 = stats[2].querySelector('.stat-label');
+        if (num3 && data.stat3Number) num3.textContent = data.stat3Number;
+        if (label3 && data.stat3Label) label3.textContent = data.stat3Label;
+    }
+
+    console.log('✅ Hero 섹션 로드 완료');
+}
 
 function loadPortfolioData() {
     const saved = localStorage.getItem('portfolioData');

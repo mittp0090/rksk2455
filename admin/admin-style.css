@@ -652,6 +652,175 @@ button {
     color: #aaa;
 }
 
+/* ============================================
+   고급스러운 섹션 디자인
+   ============================================ */
+
+.section-header-fancy {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.section-icon {
+    font-size: 3rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+}
+
+.section-description {
+    color: #888;
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+    font-weight: 400;
+}
+
+.section-hero, .section-about, .section-awards {
+    background: white;
+    border-radius: 16px;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border: 1px solid #f0f0f0;
+    transition: all 0.3s;
+}
+
+.section-hero:hover, .section-about:hover, .section-awards:hover {
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.12);
+    border-color: #667eea;
+}
+
+.label-icon {
+    margin-right: 0.5rem;
+    font-size: 1.1rem;
+}
+
+/* Form Grid 레이아웃 */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.form-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+/* 통계 에디터 */
+.stats-editor {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border: 2px dashed #667eea;
+}
+
+.stats-editor h3 {
+    color: #667eea;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* 파일 업로드 스타일 */
+.file-input {
+    padding: 0.75rem;
+    border: 2px dashed #667eea;
+    border-radius: 8px;
+    width: 100%;
+    cursor: pointer;
+    background: #f8f9ff;
+    transition: all 0.3s;
+}
+
+.file-input:hover {
+    background: #e8ebff;
+    border-color: #5568d3;
+}
+
+.image-preview {
+    display: none;
+    margin-top: 1.5rem;
+    text-align: center;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+}
+
+.image-preview label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #667eea;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.image-preview img {
+    max-width: 300px;
+    max-height: 400px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* 버튼 개선 */
+.btn-large {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    transition: all 0.3s;
+}
+
+.btn-large:hover {
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    transform: translateY(-2px);
+}
+
+/* 입력 필드 개선 */
+.form-group input,
+.form-group textarea,
+.form-group select {
+    border: 2px solid #e0e0e0;
+    transition: all 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-group label {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.75rem;
+}
+
+.form-group small {
+    display: block;
+    margin-top: 0.5rem;
+    color: #888;
+    font-size: 0.875rem;
+}
+
 /* 반응형 */
 @media (max-width: 768px) {
     .admin-header {
@@ -678,5 +847,23 @@ button {
 
     .modal-actions {
         flex-direction: column;
+    }
+
+    .section-header-fancy {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-grid-3 {
+        grid-template-columns: 1fr;
+    }
+
+    .section-hero, .section-about, .section-awards {
+        padding: 1.5rem;
     }
 }

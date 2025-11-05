@@ -2,6 +2,7 @@
 
 // 기본 데이터 구조
 let portfolioData = [];
+let heroData = {};
 let textData = {};
 let contactData = {};
 let awardsData = [];
@@ -54,6 +55,7 @@ function showAdmin() {
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('adminPanel').style.display = 'block';
     renderPortfolio();
+    loadHeroData();
     loadTextData();
     loadContactData();
     loadAwards();
@@ -270,7 +272,56 @@ function savePortfolioData() {
 }
 
 // ============================================
-// 텍스트 편집
+// Hero 섹션 편집
+// ============================================
+
+function loadHeroData() {
+    // localStorage에서 Hero 데이터 로드
+    const saved = localStorage.getItem('heroData');
+    if (saved) {
+        heroData = JSON.parse(saved);
+    }
+
+    // 폼에 데이터 채우기
+    document.getElementById('heroTag').value = heroData.heroTag || 'Visual Artist';
+    document.getElementById('heroLine1').value = heroData.heroLine1 || '순간을';
+    document.getElementById('heroLine2').value = heroData.heroLine2 || '영원으로';
+    document.getElementById('heroDescription').value = heroData.heroDescription || '빛과 그림자 사이, 찰나와 영원 사이\n예술로 기억되는 순간들';
+
+    document.getElementById('stat1Number').value = heroData.stat1Number || '500+';
+    document.getElementById('stat1Label').value = heroData.stat1Label || 'Projects';
+    document.getElementById('stat2Number').value = heroData.stat2Number || '10+';
+    document.getElementById('stat2Label').value = heroData.stat2Label || 'Years';
+    document.getElementById('stat3Number').value = heroData.stat3Number || '100%';
+    document.getElementById('stat3Label').value = heroData.stat3Label || 'Satisfaction';
+}
+
+function saveHero() {
+    heroData = {
+        heroTag: document.getElementById('heroTag').value,
+        heroLine1: document.getElementById('heroLine1').value,
+        heroLine2: document.getElementById('heroLine2').value,
+        heroDescription: document.getElementById('heroDescription').value,
+        stat1Number: document.getElementById('stat1Number').value,
+        stat1Label: document.getElementById('stat1Label').value,
+        stat2Number: document.getElementById('stat2Number').value,
+        stat2Label: document.getElementById('stat2Label').value,
+        stat3Number: document.getElementById('stat3Number').value,
+        stat3Label: document.getElementById('stat3Label').value
+    };
+
+    try {
+        localStorage.setItem('heroData', JSON.stringify(heroData));
+        console.log('✅ Hero 섹션 저장 완료');
+        alert('💾 Hero 섹션이 저장되었습니다!');
+    } catch (e) {
+        console.error('Hero 저장 실패:', e);
+        alert('❌ 저장 중 오류가 발생했습니다.');
+    }
+}
+
+// ============================================
+// About 섹션 편집
 // ============================================
 
 function loadTextData() {
@@ -285,7 +336,7 @@ function loadTextData() {
     }
 }
 
-function saveTexts() {
+function saveAbout() {
     // 현재 미리보기에 표시된 이미지 src를 저장 (Base64)
     const previewDiv = document.getElementById('artistImagePreview');
     const previewImg = document.getElementById('artistImagePreviewImg');
