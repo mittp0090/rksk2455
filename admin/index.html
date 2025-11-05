@@ -35,6 +35,9 @@
             <button class="tab-btn active" onclick="switchTab('portfolio')">포트폴리오</button>
             <button class="tab-btn" onclick="switchTab('text')">텍스트 편집</button>
             <button class="tab-btn" onclick="switchTab('contact')">연락처</button>
+            <button class="tab-btn" onclick="switchTab('inquiries')">
+                접수 내역 <span id="unreadBadge" class="badge">0</span>
+            </button>
             <button class="tab-btn" onclick="switchTab('settings')">설정</button>
         </div>
 
@@ -123,6 +126,27 @@
             </div>
         </div>
 
+        <!-- 접수 내역 탭 -->
+        <div id="inquiriesTab" class="tab-content">
+            <div class="section">
+                <div class="section-header">
+                    <h2>Contact 접수 내역</h2>
+                    <div>
+                        <button onclick="markAllAsRead()" class="btn-secondary">모두 읽음 처리</button>
+                        <button onclick="deleteAllInquiries()" class="btn-danger">전체 삭제</button>
+                    </div>
+                </div>
+
+                <div id="inquiriesStats" class="inquiries-stats">
+                    <!-- 통계 정보 -->
+                </div>
+
+                <div id="inquiriesList" class="inquiries-list">
+                    <!-- 접수 내역 목록 -->
+                </div>
+            </div>
+        </div>
+
         <!-- 설정 탭 -->
         <div id="settingsTab" class="tab-content">
             <div class="section">
@@ -186,6 +210,47 @@
                 <button onclick="saveEdit()" class="btn-primary">저장</button>
                 <button onclick="deleteItem()" class="btn-danger">삭제</button>
                 <button onclick="closeModal()" class="btn-secondary">취소</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 모달: 접수 내역 상세보기 -->
+    <div id="inquiryModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeInquiryModal()">&times;</span>
+            <h2>문의 내역 상세</h2>
+
+            <div class="inquiry-detail">
+                <div class="inquiry-field">
+                    <label>접수 시간</label>
+                    <div id="inquiryDate"></div>
+                </div>
+
+                <div class="inquiry-field">
+                    <label>이름</label>
+                    <div id="inquiryName"></div>
+                </div>
+
+                <div class="inquiry-field">
+                    <label>이메일</label>
+                    <div id="inquiryEmail"></div>
+                </div>
+
+                <div class="inquiry-field">
+                    <label>제목</label>
+                    <div id="inquirySubject"></div>
+                </div>
+
+                <div class="inquiry-field">
+                    <label>메시지</label>
+                    <div id="inquiryMessage" class="inquiry-message"></div>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button onclick="replyToInquiry()" class="btn-primary">답장하기</button>
+                <button onclick="deleteInquiry()" class="btn-danger">삭제</button>
+                <button onclick="closeInquiryModal()" class="btn-secondary">닫기</button>
             </div>
         </div>
     </div>

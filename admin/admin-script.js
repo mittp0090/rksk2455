@@ -57,6 +57,7 @@ function showAdmin() {
     loadTextData();
     loadContactData();
     loadAwards();
+    updateInquiriesBadge();
 }
 
 // 탭 전환
@@ -74,6 +75,11 @@ function switchTab(tabName) {
     // 선택한 탭 활성화
     event.target.classList.add('active');
     document.getElementById(tabName + 'Tab').classList.add('active');
+
+    // 접수 내역 탭이면 데이터 로드
+    if (tabName === 'inquiries') {
+        loadInquiries();
+    }
 }
 
 // ============================================
@@ -451,7 +457,218 @@ function resetData() {
 // 모달 닫기 (배경 클릭)
 window.onclick = function(event) {
     const modal = document.getElementById('editModal');
+    const inquiryModal = document.getElementById('inquiryModal');
     if (event.target === modal) {
         closeModal();
     }
+    if (event.target === inquiryModal) {
+        closeInquiryModal();
+    }
+}
+
+// ============================================
+// 접수 내역 관리
+// ============================================
+
+let currentInquiryId = null;
+
+// 접수 내역 배지 업데이트
+function updateInquiriesBadge() {
+    const inquiries = JSON.parse(localStorage.getItem('inquiries') || '[]');
+    const unreadCount = inquiries.filter(i => !i.read).length;
+    const badge = document.getElementById('unreadBadge');
+
+    if (badge) {
+        badge.textContent = unreadCount;
+        badge.style.display = unreadCount > 0 ? 'inline-block' : 'none';
+    }
+}
+
+// 접수 내역 로드
+function loadInquiries() {
+    const inquiries = JSON.parse(localStorage.getItem('inquiries') || '[]');
+    renderInquiriesStats(inquiries);
+    renderInquiriesList(inquiries);
+    updateInquiriesBadge();
+}
+
+// 통계 렌더링
+function renderInquiriesStats(inquiries) {
+    const unreadCount = inquiries.filter(i => !i.read).length;
+    const totalCount = inquiries.length;
+
+    const statsHTML = `
+        <div class="stat-card unread">
+            <div class="stat-number">${unreadCount}</div>
+            <div class="stat-label">미읽음 문의</div>
+        </div>
+        <div class="stat-card total">
+            <div class="stat-number">${totalCount}</div>
+            <div class="stat-label">전체 문의</div>
+        </div>
+    `;
+
+    document.getElementById('inquiriesStats').innerHTML = statsHTML;
+}
+
+// 목록 렌더링
+function renderInquiriesList(inquiries) {
+    const listContainer = document.getElementById('inquiriesList');
+
+    if (inquiries.length === 0) {
+        listContainer.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-state-icon">📭</div>
+                <div class="empty-state-text">접수된 문의가 없습니다</div>
+                <div class="empty-state-subtext">Contact 폼으로 문의가 들어오면 여기에 표시됩니다.</div>
+            </div>
+        `;
+        return;
+    }
+
+    const listHTML = inquiries.map(inquiry => {
+        const date = formatDate(inquiry.date);
+        const unreadClass = inquiry.read ? '' : 'unread';
+        const preview = inquiry.message.length > 100
+            ? inquiry.message.substring(0, 100) + '...'
+            : inquiry.message;
+
+        return `
+            <div class="inquiry-item ${unreadClass}" onclick="viewInquiry(${inquiry.id})">
+                <div class="inquiry-header">
+                    <div class="inquiry-name">${inquiry.name}</div>
+                    <div class="inquiry-date">${date}</div>
+                </div>
+                <div class="inquiry-subject">${inquiry.subject}</div>
+                <div class="inquiry-preview">${preview}</div>
+                <div class="inquiry-email">📧 ${inquiry.email}</div>
+                <div class="inquiry-actions" onclick="event.stopPropagation()">
+                    ${!inquiry.read ? `<button onclick="markAsRead(${inquiry.id})" class="btn-secondary">읽음 처리</button>` : ''}
+                    <button onclick="deleteInquiryFromList(${inquiry.id})" class="btn-danger">삭제</button>
+                </div>
+            </div>
+        `;
+    }).join('');
+
+    listContainer.innerHTML = listHTML;
+}
+
+// 날짜 포맷팅
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diff = now - date;
+    const diffMinutes = Math.floor(diff / 60000);
+    const diffHours = Math.floor(diff / 3600000);
+    const diffDays = Math.floor(diff / 86400000);
+
+    if (diffMinutes < 1) return '방금 전';
+    if (diffMinutes < 60) return `${diffMinutes}분 전`;
+    if (diffHours < 24) return `${diffHours}시간 전`;
+    if (diffDays < 7) return `${diffDays}일 전`;
+
+    return date.toLocaleDateString('ko-KR', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+}
+
+// 상세보기
+function viewInquiry(id) {
+    let inquiries = JSON.parse(localStorage.getItem('inquiries') || '[]');
+    const inquiry = inquiries.find(i => i.id === id);
+
+    if (!inquiry) return;
+
+    currentInquiryId = id;
+
+    // 모달에 데이터 채우기
+    document.getElementById('inquiryDate').textContent = formatDate(inquiry.date);
+    document.getElementById('inquiryName').textContent = inquiry.name;
+    document.getElementById('inquiryEmail').textContent = inquiry.email;
+    document.getElementById('inquirySubject').textContent = inquiry.subject;
+    document.getElementById('inquiryMessage').textContent = inquiry.message;
+
+    // 읽음 처리
+    if (!inquiry.read) {
+        inquiry.read = true;
+        localStorage.setItem('inquiries', JSON.stringify(inquiries));
+        updateInquiriesBadge();
+    }
+
+    // 모달 표시
+    document.getElementById('inquiryModal').style.display = 'block';
+}
+
+// 모달 닫기
+function closeInquiryModal() {
+    document.getElementById('inquiryModal').style.display = 'none';
+    currentInquiryId = null;
+    loadInquiries(); // 목록 새로고침
+}
+
+// 읽음 처리
+function markAsRead(id) {
+    let inquiries = JSON.parse(localStorage.getItem('inquiries') || '[]');
+    const inquiry = inquiries.find(i => i.id === id);
+
+    if (inquiry) {
+        inquiry.read = true;
+        localStorage.setItem('inquiries', JSON.stringify(inquiries));
+        loadInquiries();
+    }
+}
+
+// 모두 읽음 처리
+function markAllAsRead() {
+    if (confirm('모든 문의를 읽음 처리하시겠습니까?')) {
+        let inquiries = JSON.parse(localStorage.getItem('inquiries') || '[]');
+        inquiries.forEach(i => i.read = true);
+        localStorage.setItem('inquiries', JSON.stringify(inquiries));
+        loadInquiries();
+    }
+}
+
+// 목록에서 삭제
+function deleteInquiryFromList(id) {
+    if (confirm('이 문의를 삭제하시겠습니까?')) {
+        let inquiries = JSON.parse(localStorage.getItem('inquiries') || '[]');
+        inquiries = inquiries.filter(i => i.id !== id);
+        localStorage.setItem('inquiries', JSON.stringify(inquiries));
+        loadInquiries();
+    }
+}
+
+// 모달에서 삭제
+function deleteInquiry() {
+    if (!currentInquiryId) return;
+
+    if (confirm('이 문의를 삭제하시겠습니까?')) {
+        let inquiries = JSON.parse(localStorage.getItem('inquiries') || '[]');
+        inquiries = inquiries.filter(i => i.id !== currentInquiryId);
+        localStorage.setItem('inquiries', JSON.stringify(inquiries));
+        closeInquiryModal();
+    }
+}
+
+// 전체 삭제
+function deleteAllInquiries() {
+    if (confirm('⚠️ 모든 접수 내역을 삭제하시겠습니까?\n이 작업은 되돌릴 수 없습니다!')) {
+        if (confirm('정말로 삭제하시겠습니까?')) {
+            localStorage.removeItem('inquiries');
+            loadInquiries();
+        }
+    }
+}
+
+// 답장하기
+function replyToInquiry() {
+    const email = document.getElementById('inquiryEmail').textContent;
+    const subject = document.getElementById('inquirySubject').textContent;
+
+    // 기본 메일 클라이언트로 열기
+    window.location.href = `mailto:${email}?subject=Re: ${encodeURIComponent(subject)}`;
 }

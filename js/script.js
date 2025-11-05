@@ -132,9 +132,29 @@ if (contactForm) {
         const formData = new FormData(contactForm);
         const data = Object.fromEntries(formData);
 
-        // Simulate sending (replace with actual API call)
+        // Save to localStorage
         setTimeout(() => {
-            console.log('Form submitted:', data);
+            // Get existing inquiries
+            let inquiries = JSON.parse(localStorage.getItem('inquiries') || '[]');
+
+            // Create new inquiry
+            const inquiry = {
+                id: Date.now(),
+                name: data.name,
+                email: data.email,
+                subject: data.subject,
+                message: data.message,
+                date: new Date().toISOString(),
+                read: false
+            };
+
+            // Add to beginning of array
+            inquiries.unshift(inquiry);
+
+            // Save to localStorage
+            localStorage.setItem('inquiries', JSON.stringify(inquiries));
+
+            console.log('Form submitted and saved:', inquiry);
 
             // Success state
             submitBtn.textContent = '전송 완료!';

@@ -445,6 +445,213 @@ button {
     cursor: pointer;
 }
 
+/* 접수 내역 배지 */
+.badge {
+    display: inline-block;
+    background: #dc3545;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.2rem 0.5rem;
+    border-radius: 12px;
+    margin-left: 0.5rem;
+    min-width: 20px;
+    text-align: center;
+}
+
+/* 접수 내역 통계 */
+.inquiries-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.stat-card.unread {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.stat-card.total {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* 접수 내역 목록 */
+.inquiries-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.inquiry-item {
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.inquiry-item:hover {
+    border-color: #667eea;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+    transform: translateY(-2px);
+}
+
+.inquiry-item.unread {
+    border-color: #f5576c;
+    background: #fff5f7;
+}
+
+.inquiry-item.unread::before {
+    content: 'NEW';
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #f5576c;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+}
+
+.inquiry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.inquiry-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #333;
+}
+
+.inquiry-date {
+    font-size: 0.875rem;
+    color: #888;
+}
+
+.inquiry-subject {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+.inquiry-preview {
+    font-size: 0.875rem;
+    color: #777;
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.inquiry-email {
+    font-size: 0.875rem;
+    color: #667eea;
+    margin-top: 0.5rem;
+    font-weight: 500;
+}
+
+.inquiry-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.inquiry-actions button {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    border-radius: 6px;
+}
+
+/* 접수 내역 상세보기 모달 */
+.inquiry-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.inquiry-field {
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 1rem;
+}
+
+.inquiry-field:last-child {
+    border-bottom: none;
+}
+
+.inquiry-field label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #667eea;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.inquiry-field div {
+    font-size: 1rem;
+    color: #333;
+    line-height: 1.6;
+}
+
+.inquiry-message {
+    white-space: pre-wrap;
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #888;
+}
+
+.empty-state-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.empty-state-text {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.empty-state-subtext {
+    font-size: 1rem;
+    color: #aaa;
+}
+
 /* 반응형 */
 @media (max-width: 768px) {
     .admin-header {
