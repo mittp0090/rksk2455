@@ -277,13 +277,15 @@ function loadTextData() {
     document.getElementById('aboutLead').value = textData.aboutLead || '';
     document.getElementById('aboutText1').value = textData.aboutText1 || '';
     document.getElementById('aboutText2').value = textData.aboutText2 || '';
+    document.getElementById('artistImageUrl').value = textData.artistImageUrl || '';
 }
 
 function saveTexts() {
     textData = {
         aboutLead: document.getElementById('aboutLead').value,
         aboutText1: document.getElementById('aboutText1').value,
-        aboutText2: document.getElementById('aboutText2').value
+        aboutText2: document.getElementById('aboutText2').value,
+        artistImageUrl: document.getElementById('artistImageUrl').value
     };
 
     localStorage.setItem('textData', JSON.stringify(textData));

@@ -74,6 +74,12 @@ function loadTextData() {
     if (aboutTexts[1] && data.aboutText2) {
         aboutTexts[1].innerHTML = data.aboutText2.replace(/\n/g, '<br>');
     }
+
+    // 작가 사진 업데이트
+    const artistImage = document.querySelector('.about-image img');
+    if (artistImage && data.artistImageUrl) {
+        artistImage.src = data.artistImageUrl;
+    }
 }
 
 function loadContactData() {
