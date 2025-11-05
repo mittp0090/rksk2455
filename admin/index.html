@@ -11,7 +11,7 @@
     <!-- 로그인 화면 -->
     <div id="loginScreen" class="login-screen">
         <div class="login-box">
-            <h1>🔐 관리자 로그인</h1>
+            <h1>관리자 로그인</h1>
             <p>포트폴리오 관리 시스템</p>
             <input type="password" id="passwordInput" placeholder="비밀번호를 입력하세요" />
             <button onclick="login()">로그인</button>
@@ -23,10 +23,10 @@
     <div id="adminPanel" class="admin-panel" style="display: none;">
         <!-- 헤더 -->
         <header class="admin-header">
-            <h1>📸 포트폴리오 관리</h1>
+            <h1>포트폴리오 관리</h1>
             <div class="header-actions">
-                <button onclick="saveAll()" class="btn-save">💾 모두 저장</button>
-                <button onclick="logout()" class="btn-logout">🚪 로그아웃</button>
+                <button onclick="saveAll()" class="btn-save">모두 저장</button>
+                <button onclick="logout()" class="btn-logout">로그아웃</button>
             </div>
         </header>
 
@@ -61,7 +61,6 @@
             <!-- Hero 섹션 편집 -->
             <div class="section section-hero">
                 <div class="section-header-fancy">
-                    <div class="section-icon">🎬</div>
                     <div>
                         <h2>Hero 섹션 (메인 화면)</h2>
                         <p class="section-description">홈페이지 첫 화면에 표시되는 메인 텍스트</p>
@@ -70,30 +69,30 @@
 
                 <div class="form-grid">
                     <div class="form-group">
-                        <label><span class="label-icon">🏷️</span> 상단 태그</label>
+                        <label>상단 태그</label>
                         <input type="text" id="heroTag" placeholder="Visual Artist" />
                         <small>예: Visual Artist, Photographer, 사진작가</small>
                     </div>
 
                     <div class="form-group">
-                        <label><span class="label-icon">📝</span> 메인 타이틀 (줄 1)</label>
+                        <label>메인 타이틀 (줄 1)</label>
                         <input type="text" id="heroLine1" placeholder="순간을" />
                     </div>
 
                     <div class="form-group">
-                        <label><span class="label-icon">📝</span> 메인 타이틀 (줄 2)</label>
+                        <label>메인 타이틀 (줄 2)</label>
                         <input type="text" id="heroLine2" placeholder="영원으로" />
                     </div>
 
                     <div class="form-group full-width">
-                        <label><span class="label-icon">💬</span> 설명 문구</label>
+                        <label>설명 문구</label>
                         <textarea id="heroDescription" rows="3" placeholder="빛과 그림자 사이, 찰나와 영원 사이&#10;예술로 기억되는 순간들"></textarea>
                         <small>줄바꿈으로 두 줄 입력 가능</small>
                     </div>
                 </div>
 
                 <div class="stats-editor">
-                    <h3><span class="label-icon">📊</span> 통계 정보</h3>
+                    <h3>통계 정보</h3>
                     <div class="form-grid-3">
                         <div class="form-group">
                             <label>숫자 1</label>
@@ -126,13 +125,12 @@
                     </div>
                 </div>
 
-                <button onclick="saveHero()" class="btn-primary btn-large">💾 Hero 섹션 저장</button>
+                <button onclick="saveHero()" class="btn-primary btn-large">Hero 섹션 저장</button>
             </div>
 
             <!-- About 섹션 편집 -->
             <div class="section section-about">
                 <div class="section-header-fancy">
-                    <div class="section-icon">👤</div>
                     <div>
                         <h2>About 섹션 (소개)</h2>
                         <p class="section-description">작가 소개 및 프로필 정보</p>
@@ -140,48 +138,47 @@
                 </div>
 
                 <div class="form-group">
-                    <label><span class="label-icon">✨</span> 리드 문구</label>
+                    <label>리드 문구</label>
                     <textarea id="aboutLead" rows="2" placeholder="저는 10년 이상의 경력을 가진..."></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label><span class="label-icon">📄</span> 소개 1</label>
+                    <label>소개 1</label>
                     <textarea id="aboutText1" rows="3"></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label><span class="label-icon">📄</span> 소개 2</label>
+                    <label>소개 2</label>
                     <textarea id="aboutText2" rows="3"></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label><span class="label-icon">📸</span> 작가 사진 업로드 (JPG, PNG)</label>
+                    <label>작가 사진 업로드 (JPG, PNG)</label>
 
                     <input type="file" id="artistImageFile" accept="image/jpeg,image/jpg,image/png,image/webp"
                            onchange="handleArtistImageUpload(event)"
                            class="file-input" />
                     <small style="color: #888; font-size: 0.875rem; display: block; margin-top: 0.5rem;">
-                        💡 권장 크기: 600x800px, 최대 5MB
+                        권장 크기: 600x800px, 최대 5MB
                     </small>
 
                     <div id="artistImagePreview" class="image-preview">
-                        <label>📸 미리보기</label>
+                        <label>미리보기</label>
                         <img id="artistImagePreviewImg" />
                         <div style="margin-top: 1rem;">
                             <button onclick="clearArtistImage()" class="btn-danger" type="button">
-                                🗑️ 이미지 제거
+                                이미지 제거
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <button onclick="saveAbout()" class="btn-primary btn-large">💾 About 섹션 저장</button>
+                <button onclick="saveAbout()" class="btn-primary btn-large">About 섹션 저장</button>
             </div>
 
             <!-- 수상 경력 -->
             <div class="section section-awards">
                 <div class="section-header-fancy">
-                    <div class="section-icon">🏆</div>
                     <div>
                         <h2>수상 경력</h2>
                         <p class="section-description">작가의 수상 이력 및 인정</p>
@@ -270,9 +267,9 @@
                 <hr style="margin: 2rem 0;">
 
                 <h3>데이터 관리</h3>
-                <button onclick="exportData()" class="btn-secondary">📥 데이터 내보내기 (JSON)</button>
-                <button onclick="importData()" class="btn-secondary">📤 데이터 가져오기</button>
-                <button onclick="resetData()" class="btn-danger">⚠️ 초기화</button>
+                <button onclick="exportData()" class="btn-secondary">데이터 내보내기 (JSON)</button>
+                <button onclick="importData()" class="btn-secondary">데이터 가져오기</button>
+                <button onclick="resetData()" class="btn-danger">초기화</button>
 
                 <input type="file" id="importFile" accept=".json" style="display: none;" onchange="handleImport(event)">
             </div>

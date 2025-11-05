@@ -265,9 +265,9 @@ function saveEdit() {
             alert('저장되었습니다!');
         } catch (e) {
             if (e.name === 'QuotaExceededError') {
-                alert('❌ 저장 실패: 이미지 파일이 너무 큽니다. 더 작은 이미지를 사용하세요.');
+                alert('저장 실패: 이미지 파일이 너무 큽니다. 더 작은 이미지를 사용하세요.');
             } else {
-                alert('❌ 저장 중 오류가 발생했습니다.');
+                alert('저장 중 오류가 발생했습니다.');
             }
         }
     }
@@ -301,14 +301,14 @@ function handlePortfolioImageUpload(event) {
 
     // 파일 크기 체크 (5MB 제한)
     if (file.size > 5 * 1024 * 1024) {
-        alert('⚠️ 파일 크기가 너무 큽니다. 5MB 이하의 이미지를 선택하세요.');
+        alert('파일 크기가 너무 큽니다. 5MB 이하의 이미지를 선택하세요.');
         event.target.value = '';
         return;
     }
 
     // 파일 타입 체크
     if (!file.type.match('image/(jpeg|jpg|png|webp)')) {
-        alert('⚠️ JPG, PNG, WebP 형식만 지원합니다.');
+        alert('JPG, PNG, WebP 형식만 지원합니다.');
         event.target.value = '';
         return;
     }
@@ -325,7 +325,7 @@ function handlePortfolioImageUpload(event) {
     };
 
     reader.onerror = function() {
-        alert('❌ 파일을 읽는 중 오류가 발생했습니다.');
+        alert('파일을 읽는 중 오류가 발생했습니다.');
         event.target.value = '';
     };
 
@@ -394,10 +394,10 @@ function saveHero() {
     try {
         localStorage.setItem('heroData', JSON.stringify(heroData));
         console.log('✅ Hero 섹션 저장 완료');
-        alert('💾 Hero 섹션이 저장되었습니다!');
+        alert('Hero 섹션이 저장되었습니다!');
     } catch (e) {
         console.error('Hero 저장 실패:', e);
-        alert('❌ 저장 중 오류가 발생했습니다.');
+        alert('저장 중 오류가 발생했습니다.');
     }
 }
 
@@ -449,10 +449,10 @@ function saveAbout() {
         alert('저장되었습니다!');
     } catch (e) {
         if (e.name === 'QuotaExceededError') {
-            alert('❌ 저장 실패: 파일이 너무 큽니다. 더 작은 이미지를 사용하세요.');
+            alert('저장 실패: 파일이 너무 큽니다. 더 작은 이미지를 사용하세요.');
             console.error('localStorage 용량 초과:', e);
         } else {
-            alert('❌ 저장 중 오류가 발생했습니다.');
+            alert('저장 중 오류가 발생했습니다.');
             console.error('저장 오류:', e);
         }
     }
@@ -466,14 +466,14 @@ function handleArtistImageUpload(event) {
 
     // 파일 크기 체크 (5MB 제한)
     if (file.size > 5 * 1024 * 1024) {
-        alert('⚠️ 파일 크기가 너무 큽니다. 5MB 이하의 이미지를 선택하세요.');
+        alert('파일 크기가 너무 큽니다. 5MB 이하의 이미지를 선택하세요.');
         event.target.value = '';
         return;
     }
 
     // 파일 타입 체크
     if (!file.type.match('image/(jpeg|jpg|png|webp)')) {
-        alert('⚠️ JPG, PNG, WebP 형식만 지원합니다.');
+        alert('JPG, PNG, WebP 형식만 지원합니다.');
         event.target.value = '';
         return;
     }
@@ -490,7 +490,7 @@ function handleArtistImageUpload(event) {
     };
 
     reader.onerror = function() {
-        alert('❌ 파일을 읽는 중 오류가 발생했습니다.');
+        alert('파일을 읽는 중 오류가 발생했습니다.');
         event.target.value = '';
     };
 
@@ -606,7 +606,7 @@ function saveAll() {
     saveTexts();
     saveContact();
     localStorage.setItem('awardsData', JSON.stringify(awardsData));
-    alert('✅ 모든 데이터가 저장되었습니다!');
+    alert('모든 데이터가 저장되었습니다!');
 }
 
 function exportData() {
@@ -671,7 +671,7 @@ function handleImport(event) {
 }
 
 function resetData() {
-    if (confirm('⚠️ 모든 데이터를 초기화하시겠습니까?\n이 작업은 되돌릴 수 없습니다!')) {
+    if (confirm('모든 데이터를 초기화하시겠습니까?\n이 작업은 되돌릴 수 없습니다!')) {
         if (confirm('정말로 초기화하시겠습니까?')) {
             localStorage.clear();
             sessionStorage.clear();
@@ -768,7 +768,7 @@ function renderInquiriesList(inquiries) {
                 </div>
                 <div class="inquiry-subject">${inquiry.subject}</div>
                 <div class="inquiry-preview">${preview}</div>
-                <div class="inquiry-email">📧 ${inquiry.email}</div>
+                <div class="inquiry-email">${inquiry.email}</div>
                 <div class="inquiry-actions" onclick="event.stopPropagation()">
                     ${!inquiry.read ? `<button onclick="markAsRead(${inquiry.id})" class="btn-secondary">읽음 처리</button>` : ''}
                     <button onclick="deleteInquiryFromList(${inquiry.id})" class="btn-danger">삭제</button>
@@ -883,7 +883,7 @@ function deleteInquiry() {
 
 // 전체 삭제
 function deleteAllInquiries() {
-    if (confirm('⚠️ 모든 접수 내역을 삭제하시겠습니까?\n이 작업은 되돌릴 수 없습니다!')) {
+    if (confirm('모든 접수 내역을 삭제하시겠습니까?\n이 작업은 되돌릴 수 없습니다!')) {
         if (confirm('정말로 삭제하시겠습니까?')) {
             localStorage.removeItem('inquiries');
             loadInquiries();
