@@ -800,6 +800,13 @@ body {
 .inquiry-email {
     font-size: 0.8rem;
     color: var(--gray);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.05em;
+}
+
+.inquiry-phone {
+    font-size: 0.8rem;
+    color: var(--gray);
     margin-bottom: 1rem;
     letter-spacing: 0.05em;
 }

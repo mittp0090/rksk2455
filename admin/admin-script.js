@@ -788,6 +788,7 @@ function renderInquiriesList(inquiries) {
                 <div class="inquiry-subject">${inquiry.subject}</div>
                 <div class="inquiry-preview">${preview}</div>
                 <div class="inquiry-email">${inquiry.email}</div>
+                ${inquiry.phone ? `<div class="inquiry-phone">📞 ${inquiry.phone}</div>` : ''}
                 <div class="inquiry-actions" onclick="event.stopPropagation()">
                     ${!inquiry.read ? `<button onclick="markAsRead(${inquiry.id})" class="btn-secondary">읽음 처리</button>` : ''}
                     <button onclick="deleteInquiryFromList(${inquiry.id})" class="btn-danger">삭제</button>
@@ -835,6 +836,7 @@ function viewInquiry(id) {
     document.getElementById('inquiryDate').textContent = formatDate(inquiry.date);
     document.getElementById('inquiryName').textContent = inquiry.name;
     document.getElementById('inquiryEmail').textContent = inquiry.email;
+    document.getElementById('inquiryPhone').textContent = inquiry.phone || '미등록';
     document.getElementById('inquirySubject').textContent = inquiry.subject;
     document.getElementById('inquiryMessage').textContent = inquiry.message;
 

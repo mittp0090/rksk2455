@@ -142,6 +142,7 @@ if (contactForm) {
                 id: Date.now(),
                 name: data.name,
                 email: data.email,
+                phone: data.phone,  // 전화번호 추가
                 subject: data.subject,
                 message: data.message,
                 date: new Date().toISOString(),
