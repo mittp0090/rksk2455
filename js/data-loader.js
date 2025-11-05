@@ -79,6 +79,9 @@ function loadTextData() {
     const artistImage = document.querySelector('.about-image img');
     if (artistImage && data.artistImageUrl) {
         artistImage.src = data.artistImageUrl;
+        console.log('✅ 작가 사진 로드 완료:', data.artistImageUrl.substring(0, 50) + '...');
+    } else {
+        console.log('ℹ️ 작가 사진 없음 또는 요소를 찾을 수 없음');
     }
 }
 

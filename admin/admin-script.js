@@ -280,23 +280,21 @@ function loadTextData() {
 
     // 작가 사진이 있으면 미리보기 표시
     if (textData.artistImageUrl) {
-        // Base64나 URL 둘 다 처리
-        if (!textData.artistImageUrl.startsWith('data:image')) {
-            document.getElementById('artistImageUrl').value = textData.artistImageUrl;
-        }
         showArtistImagePreview(textData.artistImageUrl);
+        console.log('✅ 저장된 작가 사진 로드:', textData.artistImageUrl.substring(0, 50) + '...');
     }
 }
 
 function saveTexts() {
-    // 현재 미리보기에 표시된 이미지 src를 저장
+    // 현재 미리보기에 표시된 이미지 src를 저장 (Base64)
+    const previewDiv = document.getElementById('artistImagePreview');
     const previewImg = document.getElementById('artistImagePreviewImg');
-    const urlInput = document.getElementById('artistImageUrl').value;
 
-    // Base64 이미지가 있으면 그것을 사용, 없으면 URL 사용
-    const imageUrl = (previewImg.src && previewImg.src.startsWith('data:image'))
-        ? previewImg.src
-        : urlInput;
+    // 미리보기가 표시되고 있고 src가 있으면 저장
+    let imageUrl = '';
+    if (previewDiv.style.display !== 'none' && previewImg.src) {
+        imageUrl = previewImg.src;
+    }
 
     textData = {
         aboutLead: document.getElementById('aboutLead').value,
@@ -305,8 +303,27 @@ function saveTexts() {
         artistImageUrl: imageUrl
     };
 
-    localStorage.setItem('textData', JSON.stringify(textData));
-    alert('저장되었습니다!');
+    try {
+        localStorage.setItem('textData', JSON.stringify(textData));
+
+        // 저장 확인
+        if (imageUrl) {
+            const imageSize = (imageUrl.length / 1024).toFixed(2);
+            console.log('✅ 작가 사진 저장됨:', imageUrl.substring(0, 50) + '...', '크기:', imageSize + 'KB');
+        } else {
+            console.log('ℹ️ 작가 사진 없음');
+        }
+
+        alert('저장되었습니다!');
+    } catch (e) {
+        if (e.name === 'QuotaExceededError') {
+            alert('❌ 저장 실패: 파일이 너무 큽니다. 더 작은 이미지를 사용하세요.');
+            console.error('localStorage 용량 초과:', e);
+        } else {
+            alert('❌ 저장 중 오류가 발생했습니다.');
+            console.error('저장 오류:', e);
+        }
+    }
 }
 
 // 작가 사진 파일 업로드 처리
@@ -333,9 +350,6 @@ function handleArtistImageUpload(event) {
 
     reader.onload = function(e) {
         const base64Image = e.target.result;
-
-        // URL 입력 필드 비우기 (파일 업로드 우선)
-        document.getElementById('artistImageUrl').value = '';
 
         // 미리보기 표시
         showArtistImagePreview(base64Image);
@@ -364,7 +378,6 @@ function showArtistImagePreview(imageUrl) {
 function clearArtistImage() {
     if (!confirm('작가 사진을 제거하시겠습니까?')) return;
 
-    document.getElementById('artistImageUrl').value = '';
     document.getElementById('artistImageFile').value = '';
     document.getElementById('artistImagePreview').style.display = 'none';
     document.getElementById('artistImagePreviewImg').src = '';
