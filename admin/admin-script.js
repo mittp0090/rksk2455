@@ -762,10 +762,27 @@ function renderInquiriesList(inquiries) {
             ? inquiry.message.substring(0, 100) + '...'
             : inquiry.message;
 
+        // 상태 배지
+        const statusData = {
+            'pending': { text: '대기 중', class: 'status-pending' },
+            'in-progress': { text: '진행 중', class: 'status-progress' },
+            'completed': { text: '처리 완료', class: 'status-completed' },
+            'absent': { text: '부재', class: 'status-absent' }
+        };
+        const status = inquiry.status || 'pending';
+        const statusInfo = statusData[status] || statusData['pending'];
+
+        // 메모 표시 여부
+        const hasMemo = inquiry.memo && inquiry.memo.trim().length > 0;
+
         return `
             <div class="inquiry-item ${unreadClass}" onclick="viewInquiry(${inquiry.id})">
                 <div class="inquiry-header">
-                    <div class="inquiry-name">${inquiry.name}</div>
+                    <div class="inquiry-name">
+                        ${inquiry.name}
+                        <span class="inquiry-status-badge ${statusInfo.class}">${statusInfo.text}</span>
+                        ${hasMemo ? '<span class="inquiry-has-memo" title="메모 있음">📝</span>' : ''}
+                    </div>
                     <div class="inquiry-date">${date}</div>
                 </div>
                 <div class="inquiry-subject">${inquiry.subject}</div>
@@ -821,6 +838,12 @@ function viewInquiry(id) {
     document.getElementById('inquirySubject').textContent = inquiry.subject;
     document.getElementById('inquiryMessage').textContent = inquiry.message;
 
+    // 상태 선택
+    document.getElementById('inquiryStatus').value = inquiry.status || 'pending';
+
+    // 메모 불러오기
+    document.getElementById('inquiryMemo').value = inquiry.memo || '';
+
     // 읽음 처리
     if (!inquiry.read) {
         inquiry.read = true;
@@ -830,6 +853,34 @@ function viewInquiry(id) {
 
     // 모달 표시
     document.getElementById('inquiryModal').style.display = 'block';
+}
+
+// 상태 업데이트
+function updateInquiryStatus() {
+    if (!currentInquiryId) return;
+
+    let inquiries = JSON.parse(localStorage.getItem('inquiries') || '[]');
+    const inquiry = inquiries.find(i => i.id === currentInquiryId);
+
+    if (inquiry) {
+        inquiry.status = document.getElementById('inquiryStatus').value;
+        localStorage.setItem('inquiries', JSON.stringify(inquiries));
+        console.log('✅ 문의 상태 업데이트:', inquiry.status);
+    }
+}
+
+// 메모 업데이트
+function updateInquiryMemo() {
+    if (!currentInquiryId) return;
+
+    let inquiries = JSON.parse(localStorage.getItem('inquiries') || '[]');
+    const inquiry = inquiries.find(i => i.id === currentInquiryId);
+
+    if (inquiry) {
+        inquiry.memo = document.getElementById('inquiryMemo').value;
+        localStorage.setItem('inquiries', JSON.stringify(inquiries));
+        console.log('✅ 문의 메모 업데이트');
+    }
 }
 
 // 모달 닫기

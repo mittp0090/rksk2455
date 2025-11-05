@@ -145,7 +145,9 @@ if (contactForm) {
                 subject: data.subject,
                 message: data.message,
                 date: new Date().toISOString(),
-                read: false
+                read: false,
+                status: 'pending',  // 대기, 진행중, 완료, 부재
+                memo: ''  // 특이사항 메모
             };
 
             // Add to beginning of array

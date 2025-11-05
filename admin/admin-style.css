@@ -875,6 +875,50 @@ body {
     letter-spacing: 0.05em;
 }
 
+/* 상태 배지 */
+.inquiry-status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    margin-left: 0.75rem;
+    text-transform: uppercase;
+}
+
+.status-pending {
+    background: rgba(201, 166, 104, 0.15);
+    color: var(--gold);
+    border: 1px solid rgba(201, 166, 104, 0.3);
+}
+
+.status-progress {
+    background: rgba(74, 222, 128, 0.15);
+    color: var(--success);
+    border: 1px solid rgba(74, 222, 128, 0.3);
+}
+
+.status-completed {
+    background: rgba(100, 116, 139, 0.15);
+    color: #94a3b8;
+    border: 1px solid rgba(100, 116, 139, 0.3);
+}
+
+.status-absent {
+    background: rgba(248, 113, 113, 0.15);
+    color: var(--danger);
+    border: 1px solid rgba(248, 113, 113, 0.3);
+}
+
+.inquiry-has-memo {
+    display: inline-block;
+    margin-left: 0.5rem;
+    font-size: 0.9rem;
+    opacity: 0.7;
+    cursor: help;
+}
+
 /* 반응형 */
 @media (max-width: 768px) {
     .admin-header {
