@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 페이지 | 사진작가 포트폴리오</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+    <!-- 로그인 화면 -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-box">
+            <h1>🔐 관리자 로그인</h1>
+            <p>포트폴리오 관리 시스템</p>
+            <input type="password" id="passwordInput" placeholder="비밀번호를 입력하세요" />
+            <button onclick="login()">로그인</button>
+            <p class="hint">기본 비밀번호: admin1234</p>
+        </div>
+    </div>
+
+    <!-- 관리자 대시보드 -->
+    <div id="adminPanel" class="admin-panel" style="display: none;">
+        <!-- 헤더 -->
+        <header class="admin-header">
+            <h1>📸 포트폴리오 관리</h1>
+            <div class="header-actions">
+                <button onclick="saveAll()" class="btn-save">💾 모두 저장</button>
+                <button onclick="logout()" class="btn-logout">🚪 로그아웃</button>
+            </div>
+        </header>
+
+        <!-- 탭 네비게이션 -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('portfolio')">포트폴리오</button>
+            <button class="tab-btn" onclick="switchTab('text')">텍스트 편집</button>
+            <button class="tab-btn" onclick="switchTab('contact')">연락처</button>
+            <button class="tab-btn" onclick="switchTab('settings')">설정</button>
+        </div>
+
+        <!-- 포트폴리오 관리 탭 -->
+        <div id="portfolioTab" class="tab-content active">
+            <div class="section">
+                <div class="section-header">
+                    <h2>포트폴리오 이미지 관리</h2>
+                    <button onclick="addPortfolioItem()" class="btn-add">+ 새 작품 추가</button>
+                </div>
+
+                <div id="portfolioItems" class="portfolio-grid">
+                    <!-- 동적으로 생성됨 -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 텍스트 편집 탭 -->
+        <div id="textTab" class="tab-content">
+            <div class="section">
+                <h2>About 섹션 편집</h2>
+
+                <div class="form-group">
+                    <label>리드 문구</label>
+                    <textarea id="aboutLead" rows="2"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>소개 1</label>
+                    <textarea id="aboutText1" rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>소개 2</label>
+                    <textarea id="aboutText2" rows="3"></textarea>
+                </div>
+
+                <button onclick="saveTexts()" class="btn-primary">저장</button>
+            </div>
+
+            <div class="section">
+                <h2>수상 경력</h2>
+                <div id="awards">
+                    <!-- 동적으로 생성됨 -->
+                </div>
+                <button onclick="addAward()" class="btn-add">+ 수상 추가</button>
+            </div>
+        </div>
+
+        <!-- 연락처 탭 -->
+        <div id="contactTab" class="tab-content">
+            <div class="section">
+                <h2>연락처 정보</h2>
+
+                <div class="form-group">
+                    <label>이메일</label>
+                    <input type="email" id="contactEmail" />
+                </div>
+
+                <div class="form-group">
+                    <label>전화번호</label>
+                    <input type="tel" id="contactPhone" />
+                </div>
+
+                <div class="form-group">
+                    <label>위치</label>
+                    <input type="text" id="contactLocation" />
+                </div>
+
+                <div class="form-group">
+                    <label>Instagram URL</label>
+                    <input type="url" id="socialInstagram" />
+                </div>
+
+                <div class="form-group">
+                    <label>Facebook URL</label>
+                    <input type="url" id="socialFacebook" />
+                </div>
+
+                <div class="form-group">
+                    <label>LinkedIn URL</label>
+                    <input type="url" id="socialLinkedin" />
+                </div>
+
+                <button onclick="saveContact()" class="btn-primary">저장</button>
+            </div>
+        </div>
+
+        <!-- 설정 탭 -->
+        <div id="settingsTab" class="tab-content">
+            <div class="section">
+                <h2>시스템 설정</h2>
+
+                <div class="form-group">
+                    <label>비밀번호 변경</label>
+                    <input type="password" id="newPassword" placeholder="새 비밀번호" />
+                </div>
+
+                <button onclick="changePassword()" class="btn-primary">비밀번호 변경</button>
+
+                <hr style="margin: 2rem 0;">
+
+                <h3>데이터 관리</h3>
+                <button onclick="exportData()" class="btn-secondary">📥 데이터 내보내기 (JSON)</button>
+                <button onclick="importData()" class="btn-secondary">📤 데이터 가져오기</button>
+                <button onclick="resetData()" class="btn-danger">⚠️ 초기화</button>
+
+                <input type="file" id="importFile" accept=".json" style="display: none;" onchange="handleImport(event)">
+            </div>
+        </div>
+    </div>
+
+    <!-- 모달: 포트폴리오 아이템 편집 -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>작품 편집</h2>
+
+            <div class="form-group">
+                <label>카테고리</label>
+                <select id="editCategory">
+                    <option value="wedding">웨딩</option>
+                    <option value="dol">돌잔치</option>
+                    <option value="event">행사현장스케치</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>제목</label>
+                <input type="text" id="editTitle" />
+            </div>
+
+            <div class="form-group">
+                <label>이미지 URL</label>
+                <input type="url" id="editImageUrl" placeholder="https://..." />
+            </div>
+
+            <div class="form-group">
+                <label>크기</label>
+                <select id="editSize">
+                    <option value="">기본</option>
+                    <option value="large">큰 (2칸)</option>
+                    <option value="tall">세로 긴</option>
+                    <option value="wide">가로 넓은</option>
+                </select>
+            </div>
+
+            <div class="modal-actions">
+                <button onclick="saveEdit()" class="btn-primary">저장</button>
+                <button onclick="deleteItem()" class="btn-danger">삭제</button>
+                <button onclick="closeModal()" class="btn-secondary">취소</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin-script.js"></script>
+</body>
+</html>
