@@ -5,6 +5,7 @@ let portfolioData = [];
 let textData = {};
 let contactData = {};
 let awardsData = [];
+let submissionsData = [];
 let currentEditIndex = -1;
 
 // 초기화
@@ -57,6 +58,7 @@ function showAdmin() {
     loadTextData();
     loadContactData();
     loadAwards();
+    renderSubmissions();
 }
 
 // 탭 전환
@@ -165,6 +167,26 @@ function loadAllData() {
             { year: '2021', title: 'Visual Arts Recognition' }
         ];
     }
+
+    const savedSubmissions = localStorage.getItem('contactSubmissions');
+    if (savedSubmissions) {
+        try {
+            submissionsData = JSON.parse(savedSubmissions);
+            if (!Array.isArray(submissionsData)) {
+                submissionsData = [];
+            }
+        } catch (error) {
+            submissionsData = [];
+        }
+    } else {
+        submissionsData = [];
+    }
+
+    submissionsData.sort((a, b) => {
+        const aTime = new Date(a?.submittedAt || 0).getTime();
+        const bTime = new Date(b?.submittedAt || 0).getTime();
+        return bTime - aTime;
+    });
 }
 
 function renderPortfolio() {
@@ -381,7 +403,8 @@ function exportData() {
         portfolio: portfolioData,
         text: textData,
         contact: contactData,
-        awards: awardsData
+        awards: awardsData,
+        submissions: submissionsData
     };
 
     const dataStr = JSON.stringify(allData, null, 2);
@@ -426,6 +449,10 @@ function handleImport(event) {
                     awardsData = data.awards;
                     localStorage.setItem('awardsData', JSON.stringify(awardsData));
                 }
+                if (data.submissions) {
+                    submissionsData = Array.isArray(data.submissions) ? data.submissions : [];
+                    saveSubmissions();
+                }
 
                 alert('데이터를 가져왔습니다!');
                 location.reload();
@@ -454,4 +481,202 @@ window.onclick = function(event) {
     if (event.target === modal) {
         closeModal();
     }
+}
+
+// ============================================
+// 접수내용 관리
+// ============================================
+
+function renderSubmissions() {
+    const container = document.getElementById('submissionsList');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    const countElement = document.getElementById('submissionCount');
+    if (countElement) {
+        countElement.textContent = `${submissionsData.length}건 접수됨`;
+    }
+
+    if (submissionsData.length === 0) {
+        const emptyState = document.createElement('div');
+        emptyState.className = 'submission-empty';
+        emptyState.textContent = '아직 접수된 문의가 없습니다.';
+        container.appendChild(emptyState);
+        return;
+    }
+
+    submissionsData.forEach((submission, index) => {
+        const card = document.createElement('div');
+        card.className = 'submission-card';
+
+        const header = document.createElement('div');
+        header.className = 'submission-header';
+
+        const nameEl = document.createElement('div');
+        nameEl.className = 'submission-name';
+        nameEl.textContent = submission.name || '이름 미기재';
+
+        const dateEl = document.createElement('span');
+        dateEl.className = 'submission-date';
+        dateEl.textContent = formatSubmissionDate(submission.submittedAt);
+
+        header.appendChild(nameEl);
+        header.appendChild(dateEl);
+
+        const meta = document.createElement('div');
+        meta.className = 'submission-meta';
+
+        meta.appendChild(createMetaItem('이메일', submission.email || '-'));
+        meta.appendChild(createMetaItem('제목', submission.subject || '-'));
+
+        const messageEl = document.createElement('div');
+        messageEl.className = 'submission-message';
+        messageEl.textContent = submission.message || '';
+
+        const actions = document.createElement('div');
+        actions.className = 'submission-actions';
+
+        const copyBtn = document.createElement('button');
+        copyBtn.className = 'submission-action copy';
+        copyBtn.textContent = '내용 복사';
+        copyBtn.onclick = () => copySubmission(index);
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.className = 'submission-action delete';
+        deleteBtn.textContent = '삭제';
+        deleteBtn.onclick = () => removeSubmission(index);
+
+        actions.appendChild(copyBtn);
+        actions.appendChild(deleteBtn);
+
+        card.appendChild(header);
+        card.appendChild(meta);
+        card.appendChild(messageEl);
+        card.appendChild(actions);
+
+        container.appendChild(card);
+    });
+}
+
+function createMetaItem(label, value) {
+    const wrapper = document.createElement('span');
+    const strong = document.createElement('strong');
+    strong.textContent = `${label}:`;
+    wrapper.appendChild(strong);
+    wrapper.appendChild(document.createTextNode(` ${value}`));
+    return wrapper;
+}
+
+function formatSubmissionDate(value) {
+    if (!value) return '시간 정보 없음';
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) {
+        return value;
+    }
+    return date.toLocaleString('ko-KR', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+    });
+}
+
+function saveSubmissions() {
+    localStorage.setItem('contactSubmissions', JSON.stringify(submissionsData));
+}
+
+function removeSubmission(index) {
+    if (!confirm('이 접수 건을 삭제하시겠습니까?')) {
+        return;
+    }
+    submissionsData.splice(index, 1);
+    saveSubmissions();
+    renderSubmissions();
+}
+
+function clearSubmissions() {
+    if (submissionsData.length === 0) {
+        alert('삭제할 접수 내용이 없습니다.');
+        return;
+    }
+    if (!confirm('모든 접수 내용을 삭제하시겠습니까?')) {
+        return;
+    }
+    submissionsData = [];
+    saveSubmissions();
+    renderSubmissions();
+}
+
+function copySubmission(index) {
+    const submission = submissionsData[index];
+    if (!submission) return;
+
+    const text = formatSubmissionForCopy(submission);
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text)
+            .then(() => alert('클립보드에 복사되었습니다.'))
+            .catch(() => fallbackCopy(text));
+    } else {
+        fallbackCopy(text);
+    }
+}
+
+function fallbackCopy(text) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+    try {
+        document.execCommand('copy');
+        alert('클립보드에 복사되었습니다.');
+    } catch (error) {
+        prompt('아래 내용을 복사하세요:', text);
+    }
+    document.body.removeChild(textarea);
+}
+
+function formatSubmissionForCopy(submission) {
+    return [
+        `이름: ${submission.name || ''}`,
+        `이메일: ${submission.email || ''}`,
+        `제목: ${submission.subject || ''}`,
+        `메시지: ${submission.message || ''}`,
+        `접수일시: ${formatSubmissionDate(submission.submittedAt)}`
+    ].join('\n');
+}
+
+function exportSubmissions() {
+    if (submissionsData.length === 0) {
+        alert('내보낼 접수 내용이 없습니다.');
+        return;
+    }
+
+    const headers = ['이름', '이메일', '제목', '메시지', '접수일시'];
+    const rows = submissionsData.map(item => [
+        item.name || '',
+        item.email || '',
+        item.subject || '',
+        (item.message || '').replace(/\r?\n/g, ' '),
+        formatSubmissionDate(item.submittedAt)
+    ]);
+
+    const csvContent = [headers, ...rows]
+        .map(row => row.map(field => `"${String(field).replace(/"/g, '""')}"`).join(','))
+        .join('\n');
+
+    const blob = new Blob(['\ufeff' + csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `contact-submissions-${new Date().toISOString().split('T')[0]}.csv`;
+    link.click();
+    URL.revokeObjectURL(url);
 }

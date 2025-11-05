@@ -135,6 +135,7 @@ if (contactForm) {
         // Simulate sending (replace with actual API call)
         setTimeout(() => {
             console.log('Form submitted:', data);
+            saveContactSubmission(data);
 
             // Success state
             submitBtn.textContent = '전송 완료!';
@@ -153,6 +154,35 @@ if (contactForm) {
             }, 2000);
         }, 1500);
     });
+}
+
+function saveContactSubmission(data) {
+    const submissions = (() => {
+        try {
+            const raw = localStorage.getItem('contactSubmissions');
+            const parsed = raw ? JSON.parse(raw) : [];
+            return Array.isArray(parsed) ? parsed : [];
+        } catch (error) {
+            return [];
+        }
+    })();
+
+    const entry = {
+        name: data.name || '',
+        email: data.email || '',
+        subject: data.subject || '',
+        message: data.message || '',
+        submittedAt: new Date().toISOString()
+    };
+
+    submissions.unshift(entry);
+
+    const limit = 200;
+    if (submissions.length > limit) {
+        submissions.length = limit;
+    }
+
+    localStorage.setItem('contactSubmissions', JSON.stringify(submissions));
 }
 
 // Parallax Effect for Hero
