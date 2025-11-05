@@ -32,11 +32,11 @@
 
         <!-- 탭 네비게이션 -->
         <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('portfolio')">포트폴리오</button>
-            <button class="tab-btn" onclick="switchTab('text')">텍스트 편집</button>
-            <button class="tab-btn" onclick="switchTab('contact')">연락처</button>
-            <button class="tab-btn" onclick="switchTab('submissions')">접수내용</button>
-            <button class="tab-btn" onclick="switchTab('settings')">설정</button>
+            <button class="tab-btn active" data-tab-target="portfolio" onclick="switchTab('portfolio', this)">포트폴리오</button>
+            <button class="tab-btn" data-tab-target="text" onclick="switchTab('text', this)">텍스트 편집</button>
+            <button class="tab-btn" data-tab-target="contact" onclick="switchTab('contact', this)">연락처</button>
+            <button class="tab-btn" data-tab-target="submissions" onclick="switchTab('submissions', this)">접수내용</button>
+            <button class="tab-btn" data-tab-target="settings" onclick="switchTab('settings', this)">설정</button>
         </div>
 
         <!-- 포트폴리오 관리 탭 -->

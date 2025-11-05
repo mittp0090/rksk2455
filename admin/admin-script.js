@@ -63,7 +63,7 @@ function showAdmin() {
 }
 
 // 탭 전환
-function switchTab(tabName) {
+function switchTab(tabName, triggerButton) {
     // 모든 탭 버튼 비활성화
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.classList.remove('active');
@@ -75,7 +75,21 @@ function switchTab(tabName) {
     });
 
     // 선택한 탭 활성화
-    event.target.classList.add('active');
+    let activeButton = triggerButton;
+
+    if (!activeButton) {
+        const fallbackEventTarget = typeof event !== 'undefined' ? event.currentTarget || event.target : null;
+        activeButton = fallbackEventTarget;
+    }
+
+    if (!activeButton) {
+        activeButton = document.querySelector(`.tab-btn[data-tab-target="${tabName}"]`);
+    }
+
+    if (activeButton) {
+        activeButton.classList.add('active');
+    }
+
     document.getElementById(tabName + 'Tab').classList.add('active');
 }
 
