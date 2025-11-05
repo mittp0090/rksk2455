@@ -1,4 +1,6 @@
-/* 관리자 페이지 스타일 */
+/* ============================================
+   울트라 프리미엄 관리자 페이지 디자인
+   ============================================ */
 
 * {
     margin: 0;
@@ -6,139 +8,226 @@
     box-sizing: border-box;
 }
 
-body {
-    font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: #f5f5f5;
-    color: #333;
+:root {
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --secondary: #8b5cf6;
+    --success: #10b981;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
 }
 
-/* 로그인 화면 */
+body {
+    font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-attachment: fixed;
+    color: var(--gray-800);
+    line-height: 1.6;
+}
+
+/* ============================================
+   로그인 화면
+   ============================================ */
+
 .login-screen {
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 2rem;
 }
 
 .login-box {
-    background: white;
-    padding: 3rem;
-    border-radius: 15px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    padding: 3rem 2.5rem;
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     text-align: center;
-    max-width: 400px;
-    width: 90%;
+    max-width: 420px;
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .login-box h1 {
-    font-size: 2rem;
+    font-size: 2.25rem;
     margin-bottom: 0.5rem;
-    color: #667eea;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
 }
 
 .login-box p {
-    color: #666;
-    margin-bottom: 2rem;
+    color: var(--gray-600);
+    margin-bottom: 2.5rem;
+    font-size: 1.05rem;
 }
 
 .login-box input {
     width: 100%;
-    padding: 1rem;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    border: 2px solid var(--gray-200);
+    border-radius: 12px;
     font-size: 1rem;
-    margin-bottom: 1rem;
-    transition: border-color 0.3s;
+    margin-bottom: 1.25rem;
+    transition: all 0.3s;
+    background: white;
 }
 
 .login-box input:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
 }
 
 .login-box button {
     width: 100%;
-    padding: 1rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 1.1rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
     color: white;
     border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
+    border-radius: 12px;
+    font-size: 1.05rem;
+    font-weight: 700;
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: all 0.3s;
+    box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4);
 }
 
 .login-box button:hover {
     transform: translateY(-2px);
+    box-shadow: 0 15px 30px -5px rgba(99, 102, 241, 0.5);
 }
 
 .hint {
-    margin-top: 1rem;
-    font-size: 0.85rem;
-    color: #999;
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+    color: var(--gray-500);
 }
 
-/* 관리자 패널 */
+/* ============================================
+   관리자 패널
+   ============================================ */
+
 .admin-panel {
     min-height: 100vh;
-    background: #f5f5f5;
+    background: var(--gray-50);
 }
 
 .admin-header {
     background: white;
-    padding: 1.5rem 2rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 1.5rem 2.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid var(--gray-200);
 }
 
 .admin-header h1 {
-    font-size: 1.5rem;
-    color: #333;
+    font-size: 1.75rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
 }
 
 .header-actions {
     display: flex;
-    gap: 1rem;
+    gap: 0.75rem;
 }
 
-/* 탭 */
-.tabs {
-    background: white;
-    display: flex;
-    gap: 0;
-    border-bottom: 2px solid #e0e0e0;
-}
-
-.tab-btn {
-    padding: 1rem 2rem;
-    background: none;
+.btn-save, .btn-logout {
+    padding: 0.625rem 1.25rem;
     border: none;
-    border-bottom: 3px solid transparent;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
     cursor: pointer;
-    font-size: 1rem;
-    font-weight: 500;
-    color: #666;
     transition: all 0.3s;
 }
 
+.btn-save {
+    background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn-save:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+}
+
+.btn-logout {
+    background: white;
+    color: var(--gray-700);
+    border: 2px solid var(--gray-200);
+}
+
+.btn-logout:hover {
+    background: var(--gray-50);
+    border-color: var(--gray-300);
+}
+
+/* ============================================
+   탭 네비게이션 (훨씬 예쁘게)
+   ============================================ */
+
+.tabs {
+    background: white;
+    padding: 1.5rem 2.5rem;
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    border-bottom: 1px solid var(--gray-200);
+    scrollbar-width: thin;
+}
+
+.tab-btn {
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    color: var(--gray-600);
+    border: none;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+    position: relative;
+}
+
 .tab-btn:hover {
-    background: #f5f5f5;
-    color: #667eea;
+    background: var(--gray-100);
+    color: var(--gray-900);
 }
 
 .tab-btn.active {
-    color: #667eea;
-    border-bottom-color: #667eea;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
 
-/* 탭 컨텐츠 */
+/* ============================================
+   탭 컨텐츠
+   ============================================ */
+
 .tab-content {
     display: none;
-    padding: 2rem;
+    padding: 2.5rem;
     max-width: 1400px;
     margin: 0 auto;
 }
@@ -147,13 +236,45 @@ body {
     display: block;
 }
 
-/* 섹션 */
+/* ============================================
+   섹션 (훨씬 예쁜 카드)
+   ============================================ */
+
 .section {
     background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border-radius: 20px;
+    padding: 2.5rem;
     margin-bottom: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    border: 1px solid var(--gray-100);
+    transition: all 0.3s;
+}
+
+.section:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+    border-color: var(--gray-200);
+}
+
+.section-hero {
+    background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+    border: 2px solid rgba(99, 102, 241, 0.2);
+}
+
+.section-about {
+    background: linear-gradient(135deg, #10b98115 0%, #05966915 100%);
+    border: 2px solid rgba(16, 185, 129, 0.2);
+}
+
+.section-awards {
+    background: linear-gradient(135deg, #f59e0b15 0%, #d9761515 100%);
+    border: 2px solid rgba(245, 158, 11, 0.2);
+}
+
+.section h2 {
+    font-size: 1.5rem;
+    color: var(--gray-900);
+    margin-bottom: 2rem;
+    font-weight: 800;
 }
 
 .section-header {
@@ -163,41 +284,83 @@ body {
     margin-bottom: 2rem;
 }
 
-.section h2 {
-    font-size: 1.3rem;
-    color: #333;
-    margin-bottom: 1.5rem;
+.section-header h2 {
+    margin-bottom: 0;
 }
 
-/* 폼 그룹 */
+/* ============================================
+   섹션 헤더 (아이콘 + 타이틀)
+   ============================================ */
+
+.section-header-fancy {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--gray-100);
+}
+
+.section-icon {
+    font-size: 3.5rem;
+    line-height: 1;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+.section-header-fancy h2 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--gray-900);
+    margin-bottom: 0.5rem;
+}
+
+.section-description {
+    color: var(--gray-600);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* ============================================
+   폼 요소
+   ============================================ */
+
 .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
 }
 
 .form-group label {
-    display: block;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-    color: #555;
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    color: var(--gray-800);
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+}
+
+.label-icon {
+    margin-right: 0.5rem;
+    font-size: 1.15rem;
 }
 
 .form-group input,
 .form-group textarea,
 .form-group select {
     width: 100%;
-    padding: 0.75rem;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    font-size: 1rem;
+    padding: 0.875rem 1.125rem;
+    border: 2px solid var(--gray-200);
+    border-radius: 12px;
+    font-size: 0.95rem;
     font-family: inherit;
-    transition: border-color 0.3s;
+    transition: all 0.3s;
+    background: white;
 }
 
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
 }
 
 .form-group textarea {
@@ -205,506 +368,17 @@ body {
     min-height: 100px;
 }
 
-/* 버튼 */
-button {
-    font-family: inherit;
-}
-
-.btn-primary {
-    padding: 0.75rem 1.5rem;
-    background: #667eea;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.btn-primary:hover {
-    background: #5568d3;
-    transform: translateY(-2px);
-}
-
-.btn-secondary {
-    padding: 0.75rem 1.5rem;
-    background: #6c757d;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-    margin-right: 0.5rem;
-}
-
-.btn-secondary:hover {
-    background: #5a6268;
-}
-
-.btn-danger {
-    padding: 0.75rem 1.5rem;
-    background: #dc3545;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.btn-danger:hover {
-    background: #c82333;
-}
-
-.btn-add {
-    padding: 0.75rem 1.5rem;
-    background: #28a745;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.btn-add:hover {
-    background: #218838;
-}
-
-.btn-save {
-    padding: 0.75rem 1.5rem;
-    background: #28a745;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.btn-save:hover {
-    background: #218838;
-}
-
-.btn-logout {
-    padding: 0.75rem 1.5rem;
-    background: #dc3545;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.btn-logout:hover {
-    background: #c82333;
-}
-
-/* 포트폴리오 그리드 */
-.portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-}
-
-.portfolio-card {
-    background: #f8f9fa;
-    border-radius: 10px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
-    border: 2px solid #e0e0e0;
-}
-
-.portfolio-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
-
-.portfolio-card-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    background: #e0e0e0;
-}
-
-.portfolio-card-info {
-    padding: 1rem;
-}
-
-.portfolio-card-category {
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
-    background: #667eea;
-    color: white;
-    border-radius: 15px;
-    font-size: 0.75rem;
-    margin-bottom: 0.5rem;
-}
-
-.portfolio-card-title {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 0.25rem;
-}
-
-.portfolio-card-size {
-    font-size: 0.85rem;
-    color: #666;
-}
-
-/* 모달 */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-    backdrop-filter: blur(5px);
-}
-
-.modal-content {
-    background-color: white;
-    margin: 5% auto;
-    padding: 2rem;
-    border-radius: 15px;
-    width: 90%;
-    max-width: 600px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    position: relative;
-    animation: slideDown 0.3s ease;
-}
-
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.close {
-    position: absolute;
-    right: 1.5rem;
-    top: 1.5rem;
-    color: #aaa;
-    font-size: 2rem;
-    font-weight: bold;
-    cursor: pointer;
-    line-height: 1;
-}
-
-.close:hover {
-    color: #000;
-}
-
-.modal-actions {
-    display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
-/* 수상 경력 */
-.award-item {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
-    padding: 1rem;
-    background: #f8f9fa;
-    border-radius: 8px;
-}
-
-.award-item input {
-    flex: 1;
-    padding: 0.5rem;
-    border: 1px solid #e0e0e0;
-    border-radius: 5px;
-}
-
-.award-item button {
-    padding: 0.5rem 1rem;
-    background: #dc3545;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-/* 접수 내역 배지 */
-.badge {
-    display: inline-block;
-    background: #dc3545;
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 0.2rem 0.5rem;
-    border-radius: 12px;
-    margin-left: 0.5rem;
-    min-width: 20px;
-    text-align: center;
-}
-
-/* 접수 내역 통계 */
-.inquiries-stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin-bottom: 2rem;
-}
-
-.stat-card {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 1.5rem;
-    border-radius: 12px;
-    text-align: center;
-}
-
-.stat-card.unread {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-}
-
-.stat-card.total {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-}
-
-.stat-number {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-}
-
-.stat-label {
-    font-size: 1rem;
-    opacity: 0.9;
-}
-
-/* 접수 내역 목록 */
-.inquiries-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.inquiry-item {
-    background: white;
-    border: 2px solid #e0e0e0;
-    border-radius: 12px;
-    padding: 1.5rem;
-    cursor: pointer;
-    transition: all 0.3s;
-    position: relative;
-}
-
-.inquiry-item:hover {
-    border-color: #667eea;
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
-    transform: translateY(-2px);
-}
-
-.inquiry-item.unread {
-    border-color: #f5576c;
-    background: #fff5f7;
-}
-
-.inquiry-item.unread::before {
-    content: 'NEW';
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: #f5576c;
-    color: white;
-    font-size: 0.7rem;
-    font-weight: 700;
-    padding: 0.25rem 0.75rem;
-    border-radius: 12px;
-}
-
-.inquiry-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.inquiry-name {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #333;
-}
-
-.inquiry-date {
-    font-size: 0.875rem;
-    color: #888;
-}
-
-.inquiry-subject {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #555;
-    margin-bottom: 0.5rem;
-}
-
-.inquiry-preview {
-    font-size: 0.875rem;
-    color: #777;
-    line-height: 1.6;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-.inquiry-email {
-    font-size: 0.875rem;
-    color: #667eea;
-    margin-top: 0.5rem;
-    font-weight: 500;
-}
-
-.inquiry-actions {
-    display: flex;
-    gap: 0.5rem;
-    margin-top: 1rem;
-}
-
-.inquiry-actions button {
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
-    border-radius: 6px;
-}
-
-/* 접수 내역 상세보기 모달 */
-.inquiry-detail {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.inquiry-field {
-    border-bottom: 1px solid #e0e0e0;
-    padding-bottom: 1rem;
-}
-
-.inquiry-field:last-child {
-    border-bottom: none;
-}
-
-.inquiry-field label {
+.form-group small {
     display: block;
-    font-size: 0.875rem;
-    font-weight: 700;
-    color: #667eea;
-    margin-bottom: 0.5rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.inquiry-field div {
-    font-size: 1rem;
-    color: #333;
-    line-height: 1.6;
-}
-
-.inquiry-message {
-    white-space: pre-wrap;
-    background: #f8f9fa;
-    padding: 1rem;
-    border-radius: 8px;
-    border-left: 4px solid #667eea;
-}
-
-.empty-state {
-    text-align: center;
-    padding: 4rem 2rem;
-    color: #888;
-}
-
-.empty-state-icon {
-    font-size: 4rem;
-    margin-bottom: 1rem;
-    opacity: 0.5;
-}
-
-.empty-state-text {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-}
-
-.empty-state-subtext {
-    font-size: 1rem;
-    color: #aaa;
-}
-
-/* ============================================
-   고급스러운 섹션 디자인
-   ============================================ */
-
-.section-header-fancy {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 2px solid #e0e0e0;
-}
-
-.section-icon {
-    font-size: 3rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    line-height: 1;
-}
-
-.section-description {
-    color: #888;
-    font-size: 0.95rem;
     margin-top: 0.5rem;
-    font-weight: 400;
+    color: var(--gray-500);
+    font-size: 0.85rem;
 }
 
-.section-hero, .section-about, .section-awards {
-    background: white;
-    border-radius: 16px;
-    padding: 2.5rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    border: 1px solid #f0f0f0;
-    transition: all 0.3s;
-}
-
-.section-hero:hover, .section-about:hover, .section-awards:hover {
-    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.12);
-    border-color: #667eea;
-}
-
-.label-icon {
-    margin-right: 0.5rem;
-    font-size: 1.1rem;
-}
-
-/* Form Grid 레이아웃 */
+/* Form Grid */
 .form-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
     margin-bottom: 2rem;
 }
@@ -720,108 +394,539 @@ button {
     grid-column: 1 / -1;
 }
 
-/* 통계 에디터 */
+/* ============================================
+   통계 에디터
+   ============================================ */
+
 .stats-editor {
-    background: #f8f9fa;
+    background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
     padding: 2rem;
-    border-radius: 12px;
+    border-radius: 16px;
     margin-top: 2rem;
     margin-bottom: 2rem;
-    border: 2px dashed #667eea;
+    border: 2px dashed var(--gray-300);
 }
 
 .stats-editor h3 {
-    color: #667eea;
+    color: var(--primary);
     margin-bottom: 1.5rem;
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 1.15rem;
+    font-weight: 700;
 }
 
-/* 파일 업로드 스타일 */
-.file-input {
-    padding: 0.75rem;
-    border: 2px dashed #667eea;
-    border-radius: 8px;
-    width: 100%;
+/* ============================================
+   버튼 (훨씬 예쁘게)
+   ============================================ */
+
+.btn-primary {
+    padding: 0.875rem 1.75rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 700;
     cursor: pointer;
-    background: #f8f9ff;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+}
+
+.btn-large {
+    padding: 1.125rem 2.25rem;
+    font-size: 1.05rem;
+    font-weight: 800;
+    box-shadow: 0 8px 16px rgba(99, 102, 241, 0.35);
+}
+
+.btn-large:hover {
+    box-shadow: 0 12px 24px rgba(99, 102, 241, 0.45);
+}
+
+.btn-secondary {
+    padding: 0.75rem 1.5rem;
+    background: white;
+    color: var(--gray-700);
+    border: 2px solid var(--gray-300);
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-right: 0.5rem;
+}
+
+.btn-secondary:hover {
+    background: var(--gray-50);
+    border-color: var(--gray-400);
+}
+
+.btn-danger {
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, var(--danger) 0%, #dc2626 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.btn-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
+}
+
+.btn-add {
+    padding: 0.875rem 1.75rem;
+    background: white;
+    color: var(--primary);
+    border: 2px dashed var(--primary);
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
     transition: all 0.3s;
 }
 
+.btn-add:hover {
+    background: var(--primary);
+    color: white;
+    border-style: solid;
+}
+
+/* ============================================
+   파일 업로드
+   ============================================ */
+
+.file-input {
+    padding: 1rem 1.25rem;
+    border: 2px dashed var(--primary);
+    border-radius: 12px;
+    width: 100%;
+    cursor: pointer;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
 .file-input:hover {
-    background: #e8ebff;
-    border-color: #5568d3;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+    border-color: var(--secondary);
 }
 
 .image-preview {
     display: none;
     margin-top: 1.5rem;
     text-align: center;
-    padding: 1.5rem;
-    background: #f8f9fa;
-    border-radius: 12px;
+    padding: 2rem;
+    background: var(--gray-50);
+    border-radius: 16px;
+    border: 2px solid var(--gray-200);
 }
 
 .image-preview label {
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: #667eea;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--primary);
     display: block;
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
 }
 
 .image-preview img {
-    max-width: 300px;
-    max-height: 400px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    max-width: 320px;
+    max-height: 420px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* 버튼 개선 */
-.btn-large {
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
+/* ============================================
+   포트폴리오 그리드
+   ============================================ */
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.portfolio-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s;
+    border: 2px solid var(--gray-100);
+}
+
+.portfolio-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    border-color: var(--primary);
+}
+
+.portfolio-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.portfolio-card-body {
+    padding: 1.25rem;
+}
+
+.portfolio-card h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+    color: var(--gray-900);
     font-weight: 700;
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.portfolio-card p {
+    color: var(--gray-600);
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+}
+
+.portfolio-card-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.portfolio-card button {
+    flex: 1;
+    padding: 0.625rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
     transition: all 0.3s;
 }
 
-.btn-large:hover {
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+/* ============================================
+   모달
+   ============================================ */
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    z-index: 10000;
+}
+
+.modal-content {
+    background: white;
+    width: 90%;
+    max-width: 600px;
+    margin: 5% auto;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.modal-content h2 {
+    margin-bottom: 2rem;
+    color: var(--gray-900);
+    font-weight: 800;
+}
+
+.close {
+    float: right;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gray-400);
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.3s;
+}
+
+.close:hover {
+    color: var(--gray-700);
+}
+
+.modal-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 2rem;
+}
+
+.modal-actions button {
+    flex: 1;
+}
+
+/* ============================================
+   배지
+   ============================================ */
+
+.badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--danger) 0%, #dc2626 100%);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.625rem;
+    border-radius: 20px;
+    margin-left: 0.5rem;
+    min-width: 24px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+/* ============================================
+   접수 내역
+   ============================================ */
+
+.inquiries-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(99, 102, 241, 0.3);
+}
+
+.stat-card.unread {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.stat-card.total {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.stat-number {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 1.05rem;
+    opacity: 0.95;
+    font-weight: 600;
+}
+
+.inquiries-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.inquiry-item {
+    background: white;
+    border: 2px solid var(--gray-200);
+    border-radius: 16px;
+    padding: 1.75rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.inquiry-item:hover {
+    border-color: var(--primary);
+    box-shadow: 0 8px 16px rgba(99, 102, 241, 0.15);
     transform: translateY(-2px);
 }
 
-/* 입력 필드 개선 */
-.form-group input,
-.form-group textarea,
-.form-group select {
-    border: 2px solid #e0e0e0;
+.inquiry-item.unread {
+    border-color: #f5576c;
+    background: linear-gradient(135deg, rgba(245, 87, 108, 0.05) 0%, rgba(240, 147, 251, 0.05) 100%);
+}
+
+.inquiry-item.unread::before {
+    content: 'NEW';
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 0.375rem 0.875rem;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(245, 87, 108, 0.3);
+}
+
+.inquiry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.inquiry-name {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--gray-900);
+}
+
+.inquiry-date {
+    font-size: 0.875rem;
+    color: var(--gray-500);
+    font-weight: 600;
+}
+
+.inquiry-subject {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--gray-800);
+    margin-bottom: 0.625rem;
+}
+
+.inquiry-preview {
+    font-size: 0.9rem;
+    color: var(--gray-600);
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.inquiry-email {
+    font-size: 0.875rem;
+    color: var(--primary);
+    margin-top: 0.75rem;
+    font-weight: 600;
+}
+
+.inquiry-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+}
+
+.inquiry-actions button {
+    padding: 0.625rem 1.125rem;
+    font-size: 0.85rem;
+    border-radius: 10px;
+}
+
+/* 접수 내역 상세 */
+.inquiry-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+.inquiry-field {
+    border-bottom: 2px solid var(--gray-100);
+    padding-bottom: 1.25rem;
+}
+
+.inquiry-field:last-child {
+    border-bottom: none;
+}
+
+.inquiry-field label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.inquiry-field div {
+    font-size: 1.05rem;
+    color: var(--gray-800);
+    line-height: 1.7;
+}
+
+.inquiry-message {
+    white-space: pre-wrap;
+    background: var(--gray-50);
+    padding: 1.25rem;
+    border-radius: 12px;
+    border-left: 4px solid var(--primary);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 5rem 2rem;
+    color: var(--gray-500);
+}
+
+.empty-state-icon {
+    font-size: 5rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.5;
+}
+
+.empty-state-text {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--gray-700);
+}
+
+.empty-state-subtext {
+    font-size: 1.05rem;
+    color: var(--gray-500);
+}
+
+/* ============================================
+   수상 경력
+   ============================================ */
+
+.award-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding: 1.25rem;
+    background: var(--gray-50);
+    border-radius: 12px;
+    border: 2px solid var(--gray-200);
+}
+
+.award-item input {
+    flex: 1;
+    padding: 0.75rem;
+    border: 2px solid var(--gray-200);
+    border-radius: 10px;
+}
+
+.award-item button {
+    padding: 0.75rem 1.25rem;
+    background: var(--danger);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
     transition: all 0.3s;
 }
 
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus {
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+.award-item button:hover {
+    transform: scale(1.05);
 }
 
-.form-group label {
-    display: flex;
-    align-items: center;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 0.75rem;
-}
+/* ============================================
+   반응형
+   ============================================ */
 
-.form-group small {
-    display: block;
-    margin-top: 0.5rem;
-    color: #888;
-    font-size: 0.875rem;
-}
-
-/* 반응형 */
 @media (max-width: 768px) {
     .admin-header {
         flex-direction: column;
@@ -829,24 +934,21 @@ button {
     }
 
     .tabs {
-        overflow-x: auto;
+        padding: 1rem 1.5rem;
+        gap: 0.5rem;
     }
 
     .tab-btn {
-        white-space: nowrap;
+        padding: 0.625rem 1.125rem;
+        font-size: 0.875rem;
     }
 
-    .portfolio-grid {
-        grid-template-columns: 1fr;
+    .tab-content {
+        padding: 1.5rem;
     }
 
-    .modal-content {
-        width: 95%;
-        margin: 10% auto;
-    }
-
-    .modal-actions {
-        flex-direction: column;
+    .section {
+        padding: 1.75rem;
     }
 
     .section-header-fancy {
@@ -855,15 +957,26 @@ button {
         gap: 1rem;
     }
 
-    .form-grid {
-        grid-template-columns: 1fr;
-    }
-
+    .form-grid,
     .form-grid-3 {
         grid-template-columns: 1fr;
     }
 
-    .section-hero, .section-about, .section-awards {
-        padding: 1.5rem;
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 2rem 1.5rem;
+        margin: 10% auto;
+    }
+
+    .modal-actions {
+        flex-direction: column;
+    }
+
+    .inquiries-stats {
+        grid-template-columns: 1fr;
     }
 }
