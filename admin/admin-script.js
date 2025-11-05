@@ -6,6 +6,7 @@ let textData = {};
 let contactData = {};
 let awardsData = [];
 let submissionsData = [];
+const SUBMISSIONS_STORAGE_KEY = 'contactSubmissions';
 let currentEditIndex = -1;
 
 // 초기화
@@ -168,25 +169,7 @@ function loadAllData() {
         ];
     }
 
-    const savedSubmissions = localStorage.getItem('contactSubmissions');
-    if (savedSubmissions) {
-        try {
-            submissionsData = JSON.parse(savedSubmissions);
-            if (!Array.isArray(submissionsData)) {
-                submissionsData = [];
-            }
-        } catch (error) {
-            submissionsData = [];
-        }
-    } else {
-        submissionsData = [];
-    }
-
-    submissionsData.sort((a, b) => {
-        const aTime = new Date(a?.submittedAt || 0).getTime();
-        const bTime = new Date(b?.submittedAt || 0).getTime();
-        return bTime - aTime;
-    });
+    syncSubmissionsData(localStorage.getItem(SUBMISSIONS_STORAGE_KEY));
 }
 
 function renderPortfolio() {
@@ -450,7 +433,7 @@ function handleImport(event) {
                     localStorage.setItem('awardsData', JSON.stringify(awardsData));
                 }
                 if (data.submissions) {
-                    submissionsData = Array.isArray(data.submissions) ? data.submissions : [];
+                    syncSubmissionsData(data.submissions);
                     saveSubmissions();
                 }
 
@@ -559,6 +542,11 @@ function renderSubmissions() {
     });
 }
 
+function refreshSubmissions() {
+    syncSubmissionsData(localStorage.getItem(SUBMISSIONS_STORAGE_KEY));
+    renderSubmissions();
+}
+
 function createMetaItem(label, value) {
     const wrapper = document.createElement('span');
     const strong = document.createElement('strong');
@@ -586,7 +574,8 @@ function formatSubmissionDate(value) {
 }
 
 function saveSubmissions() {
-    localStorage.setItem('contactSubmissions', JSON.stringify(submissionsData));
+    sortSubmissions();
+    localStorage.setItem(SUBMISSIONS_STORAGE_KEY, JSON.stringify(submissionsData));
 }
 
 function removeSubmission(index) {
@@ -680,3 +669,50 @@ function exportSubmissions() {
     link.click();
     URL.revokeObjectURL(url);
 }
+
+function syncSubmissionsData(source) {
+    const parsed = parseSubmissionsValue(source);
+    submissionsData = parsed;
+    sortSubmissions();
+}
+
+function parseSubmissionsValue(source) {
+    if (!source) return [];
+
+    let value = source;
+
+    if (typeof source === 'string') {
+        try {
+            value = JSON.parse(source);
+        } catch (error) {
+            return [];
+        }
+    }
+
+    if (!Array.isArray(value)) {
+        return [];
+    }
+
+    return value.map(item => ({
+        name: item?.name || '',
+        email: item?.email || '',
+        subject: item?.subject || '',
+        message: item?.message || '',
+        submittedAt: item?.submittedAt || ''
+    }));
+}
+
+function sortSubmissions() {
+    submissionsData.sort((a, b) => {
+        const aTime = new Date(a?.submittedAt || 0).getTime();
+        const bTime = new Date(b?.submittedAt || 0).getTime();
+        return bTime - aTime;
+    });
+}
+
+window.addEventListener('storage', (event) => {
+    if (event.key === SUBMISSIONS_STORAGE_KEY) {
+        syncSubmissionsData(event.newValue);
+        renderSubmissions();
+    }
+});
