@@ -6,6 +6,7 @@ let heroData = {};
 let textData = {};
 let contactData = {};
 let awardsData = [];
+let brandingData = {};
 let currentEditIndex = -1;
 
 // 초기화
@@ -59,6 +60,7 @@ function showAdmin() {
     loadTextData();
     loadContactData();
     loadAwards();
+    loadBranding();
     updateInquiriesBadge();
 }
 
@@ -898,4 +900,43 @@ function replyToInquiry() {
 
     // 기본 메일 클라이언트로 열기
     window.location.href = `mailto:${email}?subject=Re: ${encodeURIComponent(subject)}`;
+}
+
+// ============================================
+// 브랜딩 설정
+// ============================================
+
+function loadBranding() {
+    const saved = localStorage.getItem('brandingData');
+    if (saved) {
+        brandingData = JSON.parse(saved);
+    } else {
+        brandingData = {
+            logoTextSingle: '사진작가',
+            logoTextLine1: '사진',
+            logoTextLine2: '작가'
+        };
+    }
+
+    // 폼에 데이터 채우기
+    document.getElementById('logoTextSingle').value = brandingData.logoTextSingle || '사진작가';
+    document.getElementById('logoTextLine1').value = brandingData.logoTextLine1 || '사진';
+    document.getElementById('logoTextLine2').value = brandingData.logoTextLine2 || '작가';
+}
+
+function saveBranding() {
+    brandingData = {
+        logoTextSingle: document.getElementById('logoTextSingle').value,
+        logoTextLine1: document.getElementById('logoTextLine1').value,
+        logoTextLine2: document.getElementById('logoTextLine2').value
+    };
+
+    try {
+        localStorage.setItem('brandingData', JSON.stringify(brandingData));
+        console.log('✅ 브랜딩 설정 저장 완료');
+        alert('브랜딩 설정이 저장되었습니다!');
+    } catch (e) {
+        console.error('브랜딩 저장 실패:', e);
+        alert('저장 중 오류가 발생했습니다.');
+    }
 }

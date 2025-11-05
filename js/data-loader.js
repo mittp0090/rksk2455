@@ -1,11 +1,40 @@
 // 관리자 페이지에서 저장한 데이터 로드
 
 document.addEventListener('DOMContentLoaded', function() {
+    loadBrandingData();
     loadHeroData();
     loadPortfolioData();
     loadTextData();
     loadContactData();
 });
+
+// 브랜딩 데이터 로드 (로고, 태그)
+function loadBrandingData() {
+    const saved = localStorage.getItem('brandingData');
+    if (!saved) return;
+
+    const data = JSON.parse(saved);
+
+    // 로더 타이틀
+    const loaderTitle = document.querySelector('.loader-title');
+    if (loaderTitle && data.logoTextSingle) {
+        loaderTitle.textContent = data.logoTextSingle;
+    }
+
+    // 사이드바 로고
+    const sidebarLogo = document.querySelector('.sidebar-logo h1');
+    if (sidebarLogo && data.logoTextLine1 && data.logoTextLine2) {
+        sidebarLogo.innerHTML = `${data.logoTextLine1}<br>${data.logoTextLine2}`;
+    }
+
+    // 모바일 로고
+    const mobileLogo = document.querySelector('.mobile-logo');
+    if (mobileLogo && data.logoTextSingle) {
+        mobileLogo.textContent = data.logoTextSingle;
+    }
+
+    console.log('✅ 브랜딩 데이터 로드 완료');
+}
 
 function loadHeroData() {
     const saved = localStorage.getItem('heroData');

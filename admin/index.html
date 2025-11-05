@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>관리자 페이지 | 사진작가 포트폴리오</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="admin-style.css?v=2">
+    <link rel="stylesheet" href="admin-style.css?v=3">
 </head>
 <body>
     <!-- 로그인 화면 -->
@@ -254,22 +254,59 @@
 
         <!-- 설정 탭 -->
         <div id="settingsTab" class="tab-content">
+            <!-- 브랜딩 섹션 -->
             <div class="section">
-                <h2>시스템 설정</h2>
+                <div class="section-header-fancy">
+                    <div>
+                        <h2>브랜딩 설정</h2>
+                        <p class="section-description">사이트 로고와 태그라인 관리</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>사이트 로고 (한 줄)</label>
+                    <input type="text" id="logoTextSingle" placeholder="사진작가" />
+                    <small>로더 화면과 모바일 헤더에 표시됩니다</small>
+                </div>
+
+                <div class="form-group">
+                    <label>사이드바 로고 (줄 1)</label>
+                    <input type="text" id="logoTextLine1" placeholder="사진" />
+                </div>
+
+                <div class="form-group">
+                    <label>사이드바 로고 (줄 2)</label>
+                    <input type="text" id="logoTextLine2" placeholder="작가" />
+                    <small>데스크톱 사이드바에 2줄로 표시됩니다</small>
+                </div>
+
+                <button onclick="saveBranding()" class="btn-primary btn-large">브랜딩 설정 저장</button>
+            </div>
+
+            <!-- 시스템 설정 -->
+            <div class="section">
+                <div class="section-header-fancy">
+                    <div>
+                        <h2>시스템 설정</h2>
+                        <p class="section-description">비밀번호 및 데이터 관리</p>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label>비밀번호 변경</label>
-                    <input type="password" id="newPassword" placeholder="새 비밀번호" />
+                    <input type="password" id="newPassword" placeholder="새 비밀번호 (최소 6자)" />
                 </div>
 
                 <button onclick="changePassword()" class="btn-primary">비밀번호 변경</button>
 
-                <hr style="margin: 2rem 0;">
+                <hr style="margin: 3rem 0; border: none; border-top: 1px solid rgba(201, 166, 104, 0.1);">
 
-                <h3>데이터 관리</h3>
-                <button onclick="exportData()" class="btn-secondary">데이터 내보내기 (JSON)</button>
-                <button onclick="importData()" class="btn-secondary">데이터 가져오기</button>
-                <button onclick="resetData()" class="btn-danger">초기화</button>
+                <h3 style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 400; color: var(--gold); margin-bottom: 2rem; letter-spacing: 0.05em;">데이터 관리</h3>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <button onclick="exportData()" class="btn-secondary">데이터 내보내기 (JSON)</button>
+                    <button onclick="importData()" class="btn-secondary">데이터 가져오기</button>
+                    <button onclick="resetData()" class="btn-danger">초기화</button>
+                </div>
 
                 <input type="file" id="importFile" accept=".json" style="display: none;" onchange="handleImport(event)">
             </div>
@@ -371,6 +408,6 @@
         </div>
     </div>
 
-    <script src="admin-script.js?v=2"></script>
+    <script src="admin-script.js?v=3"></script>
 </body>
 </html>
