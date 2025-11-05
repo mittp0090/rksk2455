@@ -297,7 +297,7 @@ window.addEventListener('resize', debounce(() => {
 
 // Console styling
 console.log(
-    '%c웅이작가 포트폴리오',
+    '%c사진작가 포트폴리오',
     'font-size: 24px; font-weight: bold; color: #C9A668; font-family: serif;'
 );
 console.log(
