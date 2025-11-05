@@ -60,6 +60,7 @@ function showAdmin() {
     loadContactData();
     loadAwards();
     renderSubmissions();
+    activateInitialTab();
 }
 
 // 탭 전환
@@ -91,7 +92,76 @@ function switchTab(tabName, triggerButton) {
     }
 
     document.getElementById(tabName + 'Tab').classList.add('active');
+
+    updateTabHash(tabName);
 }
+
+function activateInitialTab() {
+    const desiredTab = resolveInitialTab();
+    const targetButton = document.querySelector(`.tab-btn[data-tab-target="${desiredTab}"]`);
+
+    if (targetButton) {
+        switchTab(desiredTab, targetButton);
+        requestAnimationFrame(() => {
+            if (typeof targetButton.scrollIntoView === 'function') {
+                targetButton.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
+        });
+    }
+}
+
+function resolveInitialTab() {
+    const hashTarget = extractTabFromHash(location.hash);
+    if (hashTarget) {
+        return hashTarget;
+    }
+
+    if (submissionsData.length > 0) {
+        return 'submissions';
+    }
+
+    return 'portfolio';
+}
+
+function extractTabFromHash(hash) {
+    if (!hash || hash.length < 2) {
+        return '';
+    }
+
+    const cleanHash = hash.replace('#', '').trim();
+    if (!cleanHash) return '';
+
+    const validTabs = new Set(['portfolio', 'text', 'contact', 'submissions', 'settings']);
+    return validTabs.has(cleanHash) ? cleanHash : '';
+}
+
+function updateTabHash(tabName) {
+    if (!tabName) return;
+    const currentHash = location.hash.replace('#', '');
+    if (currentHash === tabName) return;
+
+    if (history.replaceState) {
+        history.replaceState(null, '', `#${tabName}`);
+    } else {
+        location.hash = tabName;
+    }
+}
+
+window.addEventListener('hashchange', () => {
+    if (document.getElementById('adminPanel').style.display !== 'block') {
+        return;
+    }
+
+    const target = extractTabFromHash(location.hash);
+    if (!target) {
+        return;
+    }
+
+    const button = document.querySelector(`.tab-btn[data-tab-target="${target}"]`);
+    if (button) {
+        switchTab(target, button);
+    }
+});
 
 // ============================================
 // 포트폴리오 관리
