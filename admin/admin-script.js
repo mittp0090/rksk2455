@@ -231,25 +231,45 @@ function editPortfolioItem(index) {
 
     document.getElementById('editCategory').value = item.category;
     document.getElementById('editTitle').value = item.title;
-    document.getElementById('editImageUrl').value = item.imageUrl;
     document.getElementById('editSize').value = item.size;
+
+    // 기존 이미지가 있으면 미리보기 표시
+    if (item.imageUrl) {
+        showPortfolioImagePreview(item.imageUrl);
+    } else {
+        // 미리보기 숨기기
+        document.getElementById('portfolioImagePreview').style.display = 'none';
+        document.getElementById('editImageFile').value = '';
+    }
 
     document.getElementById('editModal').style.display = 'block';
 }
 
 function saveEdit() {
     if (currentEditIndex >= 0) {
+        // 미리보기에서 이미지 가져오기 (Base64)
+        const previewImg = document.getElementById('portfolioImagePreviewImg');
+        const imageUrl = previewImg.src || '';
+
         portfolioData[currentEditIndex] = {
             category: document.getElementById('editCategory').value,
             title: document.getElementById('editTitle').value,
-            imageUrl: document.getElementById('editImageUrl').value,
+            imageUrl: imageUrl,
             size: document.getElementById('editSize').value
         };
 
-        savePortfolioData();
-        renderPortfolio();
-        closeModal();
-        alert('저장되었습니다!');
+        try {
+            savePortfolioData();
+            renderPortfolio();
+            closeModal();
+            alert('저장되었습니다!');
+        } catch (e) {
+            if (e.name === 'QuotaExceededError') {
+                alert('❌ 저장 실패: 이미지 파일이 너무 큽니다. 더 작은 이미지를 사용하세요.');
+            } else {
+                alert('❌ 저장 중 오류가 발생했습니다.');
+            }
+        }
     }
 }
 
@@ -264,11 +284,72 @@ function deleteItem() {
 
 function closeModal() {
     document.getElementById('editModal').style.display = 'none';
+    document.getElementById('portfolioImagePreview').style.display = 'none';
+    document.getElementById('editImageFile').value = '';
     currentEditIndex = -1;
 }
 
 function savePortfolioData() {
     localStorage.setItem('portfolioData', JSON.stringify(portfolioData));
+}
+
+// 포트폴리오 이미지 파일 업로드 처리
+function handlePortfolioImageUpload(event) {
+    const file = event.target.files[0];
+
+    if (!file) return;
+
+    // 파일 크기 체크 (5MB 제한)
+    if (file.size > 5 * 1024 * 1024) {
+        alert('⚠️ 파일 크기가 너무 큽니다. 5MB 이하의 이미지를 선택하세요.');
+        event.target.value = '';
+        return;
+    }
+
+    // 파일 타입 체크
+    if (!file.type.match('image/(jpeg|jpg|png|webp)')) {
+        alert('⚠️ JPG, PNG, WebP 형식만 지원합니다.');
+        event.target.value = '';
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+        const base64Image = e.target.result;
+
+        // 미리보기 표시
+        showPortfolioImagePreview(base64Image);
+
+        console.log('✅ 포트폴리오 이미지 업로드:', file.name, '크기:', (file.size / 1024).toFixed(2) + 'KB');
+    };
+
+    reader.onerror = function() {
+        alert('❌ 파일을 읽는 중 오류가 발생했습니다.');
+        event.target.value = '';
+    };
+
+    reader.readAsDataURL(file);
+}
+
+// 포트폴리오 이미지 미리보기 표시
+function showPortfolioImagePreview(imageUrl) {
+    const previewDiv = document.getElementById('portfolioImagePreview');
+    const previewImg = document.getElementById('portfolioImagePreviewImg');
+
+    previewImg.src = imageUrl;
+    previewDiv.style.display = 'block';
+}
+
+// 포트폴리오 이미지 제거
+function clearPortfolioImage() {
+    if (!confirm('이미지를 제거하시겠습니까?')) return;
+
+    document.getElementById('editImageFile').value = '';
+    document.getElementById('portfolioImagePreview').style.display = 'none';
+    document.getElementById('portfolioImagePreviewImg').src = '';
+
+    alert('이미지가 제거되었습니다. "저장" 버튼을 눌러 적용하세요.');
 }
 
 // ============================================

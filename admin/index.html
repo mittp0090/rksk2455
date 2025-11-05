@@ -300,8 +300,19 @@
             </div>
 
             <div class="form-group">
-                <label>이미지 URL</label>
-                <input type="url" id="editImageUrl" placeholder="https://..." />
+                <label>이미지 업로드 (JPG, PNG)</label>
+                <input type="file" id="editImageFile" accept="image/jpeg,image/jpg,image/png,image/webp"
+                       onchange="handlePortfolioImageUpload(event)"
+                       class="file-input" />
+                <small>권장: 1200x800px, 최대 5MB</small>
+
+                <div id="portfolioImagePreview" class="image-preview">
+                    <label>미리보기</label>
+                    <img id="portfolioImagePreviewImg" />
+                    <div style="margin-top: 1rem;">
+                        <button onclick="clearPortfolioImage()" class="btn-danger" type="button">이미지 제거</button>
+                    </div>
+                </div>
             </div>
 
             <div class="form-group">
