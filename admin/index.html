@@ -32,10 +32,11 @@
 
         <!-- 탭 네비게이션 -->
         <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('portfolio')">포트폴리오</button>
-            <button class="tab-btn" onclick="switchTab('text')">텍스트 편집</button>
-            <button class="tab-btn" onclick="switchTab('contact')">연락처</button>
-            <button class="tab-btn" onclick="switchTab('settings')">설정</button>
+            <button class="tab-btn active" data-tab-target="portfolio" onclick="switchTab('portfolio', this)">포트폴리오</button>
+            <button class="tab-btn" data-tab-target="text" onclick="switchTab('text', this)">텍스트 편집</button>
+            <button class="tab-btn" data-tab-target="contact" onclick="switchTab('contact', this)">연락처</button>
+            <button class="tab-btn" data-tab-target="submissions" onclick="switchTab('submissions', this)">접수내용</button>
+            <button class="tab-btn" data-tab-target="settings" onclick="switchTab('settings', this)">설정</button>
         </div>
 
         <!-- 포트폴리오 관리 탭 -->
@@ -47,6 +48,27 @@
                 </div>
 
                 <div id="portfolioItems" class="portfolio-grid">
+                    <!-- 동적으로 생성됨 -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 접수내용 탭 -->
+        <div id="submissionsTab" class="tab-content">
+            <div class="section">
+                <div class="section-header">
+                    <div>
+                        <h2>문의 접수 내용</h2>
+                        <p id="submissionCount" class="section-subtitle">0건 접수됨</p>
+                    </div>
+                    <div class="section-actions">
+                        <button onclick="refreshSubmissions()" class="btn-secondary">🔄 새로고침</button>
+                        <button onclick="exportSubmissions()" class="btn-secondary">📄 CSV 다운로드</button>
+                        <button onclick="clearSubmissions()" class="btn-danger">🗑️ 전체 삭제</button>
+                    </div>
+                </div>
+
+                <div id="submissionsList" class="submission-list">
                     <!-- 동적으로 생성됨 -->
                 </div>
             </div>
